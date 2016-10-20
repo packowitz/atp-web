@@ -1,0 +1,50 @@
+<div class="list-group-item atp-list fake-link" [class.active-survey]="survey.id == markedSurveyId" *ngFor="let survey of surveys" (click)="markSurvey(survey)">
+  <div class="atp-list-item">
+    <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="pic">
+    <div class="atp-data">
+      <div class="flex-space-between p-x-1">
+        <small *ngIf="survey.type == 'SECURITY'">User #{{survey.userId}}</small>
+        <small *ngIf="survey.type != 'SECURITY'">started {{util.getTimeDiff(survey.startedDate)}} ago</small>
+        <small>{{survey.startedDate | date:'dd/MM/yyyy HH:mm'}}</small>
+      </div>
+      <span class="atp-data-text h5">
+        {{survey.title ? survey.title : '&lt;no title&gt;'}}
+      </span>
+      <div class="atp-data-text">
+            <span>
+              <i class="fa fa-circle" [class.status-active]="survey.status == 'ACTIVE'" [class.status-finished]="survey.status == 'FINISHED'"></i> {{survey.answered}} votes
+              <span *ngIf="survey.type == 'SECURITY' && survey.answered > 0">
+                <span *ngIf="survey.expectedAnswer == 1"> - {{100 * survey.pic1Count / survey.answered | number : '1.0-2'}}% correct</span>
+                <span *ngIf="survey.expectedAnswer == 2"> - {{100 * survey.pic2Count / survey.answered | number : '1.0-2'}}% correct</span>
+                <span *ngIf="survey.expectedAnswer == 3"> - {{100 * survey.noOpinionCount / survey.answered | number : '1.0-2'}}% correct</span>
+              </span>
+            </span>
+      </div>
+      <div class="atp-bar">
+        <div class="atp-bar-pic1" *ngIf="survey.pic1Count > 0" [style.width]="100 * survey.pic1Count / survey.answered + '%'">
+          <span *ngIf="(100 * survey.pic1Count / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 1">{{survey.pic1Count}}</span>
+        </div>
+        <div class="atp-bar-noOpinion" *ngIf="survey.noOpinionCount > 0" [style.width]="100 * survey.noOpinionCount / survey.answered + '%'">
+          <span *ngIf="(100 * survey.noOpinionCount / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 3">{{survey.noOpinionCount}}</span>
+        </div>
+        <div class="atp-bar-pic2" *ngIf="survey.pic2Count > 0" [style.width]="100 * survey.pic2Count / survey.answered + '%'">
+          <span *ngIf="(100 * survey.pic2Count / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 2">{{survey.pic2Count}}</span>
+        </div>
+      </div>
+    </div>
+    <img [src]="'data:image/jpeg;base64,' + survey.pic2" class="pic">
+  </div>
+  <div class="flex-space-between light-text">
+    <span *ngIf="survey.male && !survey.female">male only</span>
+    <span *ngIf="!survey.male && survey.female">female only</span>
+    <span *ngIf="survey.male && survey.female">male and female</span>
+    <span>Year {{survey.minAge}}-{{survey.maxAge}}</span>
+    <span>Countries: <span *ngIf="survey.country == 'ALL'">no Restriction</span><span *ngIf="survey.country != 'ALL'">{{survey.country}}</span></span>
+  </div>
+  <div *ngIf="survey.id == markedSurveyId" class="flex-space-around m-t-1">
+    <button class="btn btn-success" *ngIf="survey.type == 'SECURITY' && survey.status == 'FINISHED'" (click)="activateSurvey(survey)">Activate</button>
+    <button class="btn btn-warning" *ngIf="survey.type == 'SECURITY' && survey.status == 'ACTIVE'" (click)="finishSurvey(survey)">Deactivate</button>
+    <button class="btn btn-danger" (click)="deleteSurvey(survey)">Delete</button>
+    <button class="btn btn-secondary" (click)="tweakSurvey(survey)">Tweak ATP</button>
+  </div>
+</div>

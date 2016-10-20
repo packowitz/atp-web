@@ -1,0 +1,52 @@
+<div class="container">
+  <ul class="nav nav-tabs flex-space-between">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['../open']" [class.active]="status == 'OPEN'">Open</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['../answered']" [class.active]="status == 'ANSWERED'">Answered</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['../closed']" [class.active]="status == 'CLOSED'">Closed</a>
+    </li>
+  </ul>
+  <div class="m-y-1">There are {{feedbackList.length}} {{name}}</div>
+  <div class="list-group">
+    <div *ngFor="let feedback of feedbackList">
+      <div class="fake-link list-group-item list-group-item-action" [class.light-grey-bg]="feedback.showDetails" [class.border-top-left-right]="feedback.showDetails" (click)="clickOnFeedback(feedback)">
+        <small class="flex-space-between">
+          <span>{{util.getTimeDiff(feedback.lastActionDate)}} ago</span>
+          <span *ngIf="feedback.answers > 0">{{feedback.answers}} answers</span>
+          <span *ngIf="feedback.answers == 0">unanswered</span>
+        </small>
+        <h5 class="list-group-item-heading">#{{feedback.id}} - {{feedback.title}}</h5>
+        <p class="list-group-item-text">{{feedback.message}}</p>
+      </div>
+      <div class="list-group-item light-grey-bg border-bottom-left-right" *ngIf="feedback.showDetails">
+        <div *ngIf="!feedback.user" class="text-xs-center"><i class="fa fa-spin fa-spinner"></i></div>
+        <div *ngIf="feedback.user">
+          <div class="flex-space-between">
+            <small>User: <strong>{{feedback.user.username ? feedback.user.username : 'Anonymous'}}#{{feedback.user.id}}</strong></small>
+            <small>Created on: <strong>{{feedback.sendDate | date:'dd/MM/yyyy HH:mm'}}</strong></small>
+          </div>
+          <div class="container m-t-1">
+            <ul class="list-group" *ngIf="feedback.feedbackAnswers && feedback.feedbackAnswers.length > 0">
+              <li *ngFor="let answer of feedback.feedbackAnswers" class="list-group-item" [class.text-xs-right]="!answer.adminAnswer">
+                <small *ngIf="answer.adminAnswer">Answered on <strong>{{answer.sendDate | date:'dd/MM/yyyy HH:mm'}}</strong> by <strong>ATP-Admin#{{answer.adminId}}</strong></small>
+                <small *ngIf="!answer.adminAnswer">User added comment on <strong>{{answer.sendDate |  date:'dd/MM/yyyy HH:mm'}}</strong></small>
+                <div>
+                  {{answer.message}}
+                </div>
+              </li>
+            </ul>
+            <div *ngIf="feedback.status != 'CLOSED'" class="flex-space-between m-t-1">
+              <textarea [(ngModel)]="feedback.newMessage" maxlength="255" class="flex-growth"></textarea>
+              <button class="btn btn-success m-x-1" (click)="sendAnswer(feedback, false)" [disabled]="!feedback.newMessage || feedback.newMessage.length == 0">Send</button>
+              <button class="btn btn-success" (click)="sendAnswer(feedback, true)" [disabled]="!feedback.newMessage || feedback.newMessage.length == 0">Send and Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

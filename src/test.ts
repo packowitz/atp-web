@@ -14,7 +14,7 @@ declare var require: any;
 // Prevent Karma from running prematurely.
 __karma__.loaded = function () {};
 
-
+declare var Promise;
 Promise.all([
   System.import('@angular/core/testing'),
   System.import('@angular/platform-browser-dynamic/testing')

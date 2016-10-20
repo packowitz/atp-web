@@ -1,0 +1,29 @@
+<div class="page">
+  <div class="menu p-r-1" *ngIf="model.webuser">
+    <nav class="nav nav-stacked text-nowrap">
+      <a [routerLink]="['/cc']" class="nav-link"><strong>Communication Center</strong></a>
+      <span class="nav-item" *ngIf="model.webuser.rightCallcenter">Feedback</span>
+      <ul *ngIf="model.webuser.rightCallcenter">
+        <li class="nav-item">
+          <a [routerLink]="['/cc/improvements/open']" [routerLinkActive]="['activenav']" class="nav-link">Improvement</a> <span class="tag tag-pill tag-primary" *ngIf="ccModel.openImprovements > 0">{{ccModel.openImprovements}}</span>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/cc/bugs/open']" [routerLinkActive]="['activenav']" class="nav-link">Bugs</a> <span class="tag tag-pill tag-primary" *ngIf="ccModel.openBugs > 0">{{ccModel.openBugs}}</span>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/cc/messages/open']" [routerLinkActive]="['activenav']" class="nav-link">Message Suggestions</a> <span class="tag tag-pill tag-primary" *ngIf="ccModel.openMessages > 0">{{ccModel.openMessages}}</span>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/cc/kudos/open']" [routerLinkActive]="['activenav']" class="nav-link">Thank you</a> <span class="tag tag-pill tag-primary" *ngIf="ccModel.openKudos > 0">{{ccModel.openKudos}}</span>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/cc/other/open']" [routerLinkActive]="['activenav']" class="nav-link">Other</a> <span class="tag tag-pill tag-primary" *ngIf="ccModel.openOthers > 0">{{ccModel.openOthers}}</span>
+        </li>
+      </ul>
+      <a [routerLink]="['/cc/announcements']" [routerLinkActive]="['activenav']" class="nav-link" *ngIf="model.webuser.rightMarketing">Announcements</a>
+    </nav>
+  </div>
+  <div class="content p-l-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

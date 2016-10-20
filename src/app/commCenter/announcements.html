@@ -1,0 +1,59 @@
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let announce of announcements">
+    <small class="flex-space-between">
+      <span>{{util.getTimeDiff(announce.sendDate)}} ago</span>
+      <span>{{announce.sendDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      <span>User #{{announce.adminId}}</span>
+    </small>
+    <div *ngIf="announce.countries != 'ALL'" class="flag-list">
+      <span *ngFor="let country of announce.countries | countrySplit">
+        <img src="assets/img/flags/{{country.alpha3}}.png" title="{{country.nameEng}}">
+      </span>
+    </div>
+    <div class="placeholder-grey" *ngIf="announce.countries == 'ALL'">no restrictions</div>
+    <h5 class="list-group-item-heading">#{{announce.id}} - {{announce.title}}</h5>
+    <p class="list-group-item-text">{{announce.message}}</p>
+  </li>
+</ul>
+<div class="m-a-2 text-xs-center">
+  <button class="btn btn-primary" (click)="showModal = true">Write an announcement</button>
+</div>
+
+<div class="modal-background" *ngIf="showModal" (click)="showModal = false">
+  <div class="modal-content zero-opacity" [@modalState]="'visible'" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="showModal = false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">New Announcement</h4>
+    </div>
+    <div class="modal-header">
+      <div class="flex-space-between">
+        Effected countries:
+        <div class="input-group inherited-width">
+          <select class="form-control" [(ngModel)]="addedCountry" (ngModelChange)="addCountry($event)">
+            <option disabled value="default">Add country</option>
+            <option *ngFor="let country of allCountries" [ngValue]="country">{{country.nameEng}}</option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="newAnnounceCountries.length > 0" class="flag-list">
+      <span *ngFor="let country of newAnnounceCountries">
+        <img src="assets/img/flags/{{country.alpha3}}.png" title="{{country.nameEng}}" class="fake-link" (click)="removeCountry(country)">
+      </span>
+      </div>
+      <div class="placeholder-grey" *ngIf="newAnnounceCountries.length == 0">no restrictions</div>
+    </div>
+    <div class="modal-body">
+      <div class="input-group">
+        <input type="text" maxlength="50" class="form-control" [(ngModel)]="newAnnounce.title" placeholder="Title">
+      </div>
+      <div class="input-group m-t-1">
+        <textarea class="form-control" [(ngModel)]="newAnnounce.message"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="!newAnnounce.title || !newAnnounce.message" (click)="sendNewAnnouncement()">Send</button>
+    </div>
+  </div>
+</div>

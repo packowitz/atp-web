@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
+import {LocalStorage} from "./shared/localStorage.component";
+import {Model} from "./shared/model.component";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'atp-app',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app works!';
+  constructor(private router: Router, private model: Model, private localStorage: LocalStorage) {}
+
+  logout() {
+    this.model.webuser = null;
+    this.localStorage.setToken(null);
+    this.router.navigateByUrl('/login');
+  }
 }

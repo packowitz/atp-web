@@ -1,0 +1,9 @@
+@import "colors";
+
+.navbar::after {
+  content: normal;
+}
+
+.navbar-nav .active .nav-link {
+  color: $atp-blue !important;
+}

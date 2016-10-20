@@ -1,0 +1,27 @@
+<div class="text-xs-center m-x-auto login-content" *ngIf="!resolvingToken">
+  <div class="m-t-3">
+    <a href="/index.html"><img width="68" src="assets/img/icon.png"></a>
+  </div>
+  <div class="m-t-2">
+    <h3 class="text-muted">Welcome to Ask the People!</h3>
+    <h6 class="text-muted">Sign in with your ATP username</h6>
+  </div>
+  <div class="form-group m-t-2">
+    <input class="form-control" type="text" placeholder="username" [(ngModel)]="username" (keyup.enter)="doLogin()">
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="password" placeholder="password" [(ngModel)]="password" (keyup.enter)="doLogin()">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-primary btn-lg btn-block" [disabled]="!username || !password" (click)="doLogin()">LOG IN</button>
+  </div>
+  <div class="flex-space-between">
+    <span><a href="">Forgot password?</a></span>
+    <span><strong>New to ATP?</strong></span>
+    <span><a href="">Register</a></span>
+  </div>
+  <div class="m-t-3 p-t-3 text-muted">
+    <img width="32" src="assets/img/icon.png">&nbsp;&nbsp;Ask the People
+    <div class="m-t-1">&copy; 2016 Pacworx</div>
+  </div>
+</div>
