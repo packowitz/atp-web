@@ -1,5 +1,15 @@
+sudo: required
 language: node_js
 node_js:
   - '6'
 
-script: ng build --prod
+services:
+  - docker
+
+script:
+  - ng build --prod
+  - docker build -t pacworx/atp-web
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker push pacworx/atp-web
