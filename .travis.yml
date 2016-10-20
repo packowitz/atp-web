@@ -8,7 +8,7 @@ services:
 
 script:
   - ng build --prod
-  - docker build -t pacworx/atp-web
+  - docker build -t pacworx/atp-web .
 
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
