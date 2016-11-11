@@ -12,6 +12,10 @@ import {MyATPsSecurityListPage} from "./myATPs/myATPsSecurityList.component";
 import {MyATPsSecurityNewPage} from "./myATPs/myATPsSecurityNew.component";
 import {ProfilePage} from "./profile/profile.component";
 import {WelcomePage} from "./welcome/welcome.component";
+import {UserPage} from "./user/user.component";
+import {UserOverviewPage} from "./user/userOverview.component";
+import {CouponsPage} from "./user/coupons.component";
+import {CouponNewPage} from "./user/couponNew.component";
 
 const routes: Routes = [
   {
@@ -21,6 +25,15 @@ const routes: Routes = [
   }, {
     path: 'login',
     component: LoginComponent
+  }, {
+    path: 'user',
+    component: UserPage,
+    canActivate: [AuthGuard],
+    children: [
+      {path: '', component: UserOverviewPage},
+      {path: 'coupons', component: CouponsPage},
+      {path: 'couponNew', component: CouponNewPage}
+    ]
   }, {
     path: 'atps',
     component: MyATPsPage,

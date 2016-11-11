@@ -11,8 +11,4 @@ export class Webuser {
     surveysAnsweredWeek: number;
     surveysStartedWeek: number;
     lastLoginTime: string;
-    rightCallcenter: boolean;
-    rightMarketing: boolean;
-    rightUserAdmin: boolean;
-    rightSecurity: boolean;
 }

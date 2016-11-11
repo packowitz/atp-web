@@ -30,6 +30,12 @@ import {LoginComponent} from "./login/login.component";
 import {CreateAtp} from "./myATPs/createAtp.component";
 import {AtpListings} from "./myATPs/atpListings.component";
 import {Observable} from "rxjs/Rx";
+import {UserPage} from "./user/user.component";
+import {UserOverviewPage} from "./user/userOverview.component";
+import {CouponsPage} from "./user/coupons.component";
+import {CouponNewPage} from "./user/couponNew.component";
+import {CouponService} from "./services/coupon.service";
+import {DatePicker} from "ng2-datepicker/ng2-datepicker";
 
 @NgModule({
   declarations: [
@@ -47,9 +53,14 @@ import {Observable} from "rxjs/Rx";
     CallcenterHomePage,
     FeedbackPage,
     AnnouncementsPage,
+    UserPage,
+    UserOverviewPage,
+    CouponsPage,
+    CouponNewPage,
     ProfilePage,
     Notification,
-    CountrySplitPipe
+    CountrySplitPipe,
+    DatePicker
   ],
   imports: [
     BrowserModule,
@@ -63,6 +74,7 @@ import {Observable} from "rxjs/Rx";
     CcModel,
     CommCenterService,
     CountryService,
+    CouponService,
     LocalStorage,
     Model,
     NotificationService,

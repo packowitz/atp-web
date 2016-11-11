@@ -5,48 +5,50 @@ import {LocalStorage} from "../shared/localStorage.component";
 import {Model} from "../shared/model.component";
 
 @Component({
-    templateUrl: './login.html'
+  templateUrl: './login.html'
 })
 export class LoginComponent {
-    username: string;
-    password: string;
-    resolvingToken: boolean = false;
+  username: string;
+  password: string;
+  resolvingToken: boolean = false;
 
-    constructor(private router: Router,
-                private authService: AuthService,
-                private localStorage: LocalStorage,
-                private model: Model) {}
+  constructor(private router: Router,
+              private authService: AuthService,
+              private localStorage: LocalStorage,
+              private model: Model) {}
 
-    ngAfterViewInit() {
-        if(this.localStorage.getToken()) {
-            this.resolvingToken = true;
-            this.authService.resolveWebuser().subscribe(
-                webuser => {
-                    this.model.webuser = webuser;
-                    this.resolvingToken = false;
-                    this.router.navigateByUrl(this.authService.redirectUrl);
-                },
-                error => {
-                    console.error(error);
-                    this.resolvingToken = false;
-                }
-            );
+  ngAfterViewInit() {
+    if(this.localStorage.getToken()) {
+      this.resolvingToken = true;
+      this.authService.resolveWebuser().subscribe(
+        data => {
+          this.model.webuser = data.webuser;
+          this.model.userRights = data.userRights;
+          this.resolvingToken = false;
+          this.router.navigateByUrl(this.authService.redirectUrl);
+        },
+        error => {
+          console.error(error);
+          this.resolvingToken = false;
         }
+      );
     }
+  }
 
-    doLogin() {
-        if(this.username && this.username.length > 0 && this.password && this.password.length > 0) {
-            this.authService.login(this.username, this.password).subscribe(
-                data => {
-                    this.localStorage.setToken(data.token);
-                    this.model.webuser = data.webuser;
-                    this.router.navigateByUrl(this.authService.redirectUrl);
-                },
-                error => {
-                    console.log("Error while login:");
-                    console.log(error);
-                }
-            );
+  doLogin() {
+    if(this.username && this.username.length > 0 && this.password && this.password.length > 0) {
+      this.authService.login(this.username, this.password).subscribe(
+        data => {
+          this.localStorage.setToken(data.token);
+          this.model.webuser = data.webuser;
+          this.model.userRights = data.userRights;
+          this.router.navigateByUrl(this.authService.redirectUrl);
+        },
+        error => {
+          console.log("Error while login:");
+          console.log(error);
         }
+      );
     }
+  }
 }

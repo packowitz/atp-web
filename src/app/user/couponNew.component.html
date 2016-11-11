@@ -1,0 +1,26 @@
+<div class="container">
+  <h4>Create a new Coupon</h4>
+  <div class="form-group">
+    <label>Choose a code that is 8-25 characters long</label>
+    <input type="text" minlength="8" maxlength="25" class="form-control" placeholder="Code" [(ngModel)]="coupon.code">
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" [(ngModel)]="coupon.singleUse">
+      Check if the coupon is for a single use only
+    </label>
+  </div>
+  <div class="form-group">
+    <label>How many pax should redeeming the coupon give?</label>
+    <input type="number" min="1" class="form-control" placeholder="Reward" [(ngModel)]="coupon.reward">
+  </div>
+  <div class="form-group">
+    <label>Valid from</label>
+    <datepicker [(ngModel)]="coupon.startDate" [expanded]="true"></datepicker>
+    <label class="m-l-1">Valid to</label>
+    <datepicker [(ngModel)]="coupon.endDate" [expanded]="true"></datepicker>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" [disabled]="!couponValid()" (click)="createCoupon()">Create Coupon</button>
+  </div>
+</div>

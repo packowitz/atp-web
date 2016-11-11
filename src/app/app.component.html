@@ -2,10 +2,13 @@
   <nav class="navbar navbar-light bg-faded flex-space-between">
     <a [routerLink]="['/']" class="navbar-brand flex-left"><img width="32" src="assets/img/icon.png">&nbsp;&nbsp;<span class="atp-logo-text">ATP <small>beta</small></span></a>
     <ul class="nav navbar-nav" *ngIf="model && model.webuser">
+      <li class="nav-item" routerLinkActive="active" *ngIf="model.userRights.coupons || model.userRights.userAdmin">
+        <a [routerLink]="['user']" class="nav-link">User</a>
+      </li>
       <li class="nav-item" routerLinkActive="active">
         <a [routerLink]="['atps/list']" class="nav-link">ATPs</a>
       </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="model.webuser.rightCallcenter || model.webuser.rightMarketing">
+      <li class="nav-item" routerLinkActive="active" *ngIf="model.userRights.callcenter || model.userRights.marketing">
         <a [routerLink]="['cc']" class="nav-link">CommCenter</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
