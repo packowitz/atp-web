@@ -23,6 +23,6 @@ export class CouponService {
   listCoupons(): Observable<Coupon[]> {
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + this.localStorage.getToken());
-    return this.http.get(environment.server + "/web/app/coupon", {headers: headers}).map(res => res.json());
+    return this.http.get(environment.server + "/web/app/coupon/list", {headers: headers}).map(res => res.json());
   }
 }
