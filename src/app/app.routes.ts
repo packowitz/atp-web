@@ -16,6 +16,7 @@ import {UserPage} from "./user/user.component";
 import {UserOverviewPage} from "./user/userOverview.component";
 import {CouponsPage} from "./user/coupons.component";
 import {CouponNewPage} from "./user/couponNew.component";
+import {MultiPictureATPPage} from "./myATPs/multiPictureATP.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
     children: [
       {path: 'list', component: MyATPsListPage},
       {path: 'new', component: MyATPsNewPage},
+      {path: 'multi-picture', component: MultiPictureATPPage},
       {path: 'securityList', component: MyATPsSecurityListPage},
       {path: 'securityNew', component: MyATPsSecurityNewPage}
     ]

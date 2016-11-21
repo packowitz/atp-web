@@ -1,9 +1,16 @@
 <div class="container">
-  <div class="picture-container">
-    <img [src]="'data:image/jpeg;base64,' + survey.pic1" *ngIf="survey.pic1" (click)="openFileDialog()" class="pic"/>
-    <div *ngIf="!survey.pic1" (click)="openFileDialog()" class="pic light-background"><i class="fa fa-picture-o default-icon"></i></div>
-    <img [src]="'data:image/jpeg;base64,' + survey.pic2" *ngIf="survey.pic2" (click)="openFileDialog()" class="pic"/>
-    <div *ngIf="!survey.pic2" (click)="openFileDialog()" class="pic light-background"><i class="fa fa-picture-o default-icon"></i></div>
+  <div class="picture-container" *ngIf="!multiPicture">
+    <img [src]="'data:image/jpeg;base64,' + survey.pic1" *ngIf="survey.pic1" (click)="openFileDialog(1)" class="pic"/>
+    <div *ngIf="!survey.pic1" (click)="openFileDialog(1)" class="pic light-background"><i class="fa fa-picture-o default-icon"></i></div>
+    <img [src]="'data:image/jpeg;base64,' + survey.pic2" *ngIf="survey.pic2" (click)="openFileDialog(2)" class="pic"/>
+    <div *ngIf="!survey.pic2" (click)="openFileDialog(2)" class="pic light-background"><i class="fa fa-picture-o default-icon"></i></div>
+  </div>
+  <div class="multi-picture-container" *ngIf="multiPicture">
+    <h5>Select at least 3 Pictures</h5>
+    <div class="picture-container">
+      <img *ngFor="let pic of multiPictures" [src]="'data:image/jpeg;base64,' + pic" class="pic">
+      <div (click)="openFileDialog()" class="add-pic"><i class="fa fa-plus default-icon"></i></div>
+    </div>
   </div>
   <div class="form-group">
     <label>OPTIONAL: giving the users a hint to where to look at</label>
@@ -51,11 +58,25 @@
     </span>
     <span class="placeholder-grey" *ngIf="selectedCountries.length == 0">no restrictions</span>
   </div>
+  <div class="form-group" *ngIf="multiPicture">
+    <label class="survey-label">&nbsp;</label>
+    <input type="checkbox" type="checkbox" (change)="toggleEachCountrySeparate()" [checked]="eachCountrySeparate"> create ATP's for each country separate
+  </div>
+  <div class="form-group">
+    <label class="survey-label">ATP-Range</label>
+    <label class="form-check-inline" *ngFor="let type of model.surveyTypes">
+      <input class="form-check-input" type="radio" name="surveyTypeRadio" (change)="surveyType = type" [value]="type.key" [checked]="type.key == surveyType.key"> {{type.name}} ({{type.answers}})
+    </label>
+  </div>
+  <div *ngIf="multiPicture">
+    You are going to create {{numberOfATPsToCreate}} ATPs
+  </div>
   <div class="text-xs-center" *ngIf="security">
-    <button class="btn btn-primary" [disabled]="!survey.pic1 || !survey.pic2 || !survey.expectedAnswer" (click)="createSecurityAtp()">Create Security ATP</button>
+    <button class="btn btn-primary" [disabled]="!surveyValid()" (click)="createSecurityAtp()">Create Security ATP</button>
   </div>
   <div class="text-xs-center" *ngIf="!security">
-    <button class="btn btn-primary" [disabled]="!survey.pic1 || !survey.pic2" (click)="createAtp()">Create ATP</button>
+    <button class="btn btn-primary" [disabled]="!surveyValid()" (click)="createAtp()">Create ATP ({{numberOfATPsToCreate * surveyType.costs}} PAX)</button>
+    <div *ngIf="model.webuser.credits < (surveyType.costs * numberOfATPsToCreate)" class="text-danger">You have only {{model.webuser.credits}} PAX</div>
   </div>
 </div>
 
@@ -64,8 +85,10 @@
   <div class="croppie-modal" (click)="$event.stopPropagation()">
     <div id="security-new-croppie"></div>
     <div class="modal-buttons">
-      <button class="btn btn-primary" (click)="setPicture(true)">As Picture 1</button>
-      <button class="btn btn-primary" (click)="setPicture(false)">As Picture 2</button>
+      <button class="btn btn-secondary" (click)="destroyCroppie()">Cancel</button>
+      <button class="btn btn-secondary" (click)="rotateLeft()"><i class="fa fa-undo"></i></button>
+      <button class="btn btn-secondary" (click)="rotateRight()"><i class="fa fa-repeat"></i></button>
+      <button class="btn btn-primary" (click)="setPicture()">Take it</button>
     </div>
   </div>
 </div>

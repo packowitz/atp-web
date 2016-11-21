@@ -39,7 +39,7 @@
     <span *ngIf="!survey.male && survey.female">female only</span>
     <span *ngIf="survey.male && survey.female">male and female</span>
     <span>Year {{survey.minAge}}-{{survey.maxAge}}</span>
-    <span>Countries: <span *ngIf="survey.country == 'ALL'">no Restriction</span><span *ngIf="survey.country != 'ALL'">{{survey.country}}</span></span>
+    <span>Countries: <span *ngIf="survey.countries == 'ALL'">no Restriction</span><span *ngIf="survey.countries != 'ALL'">{{survey.countries}}</span></span>
   </div>
   <div *ngIf="survey.id == markedSurveyId" class="flex-space-around m-t-1">
     <button class="btn btn-success" *ngIf="survey.type == 'SECURITY' && survey.status == 'FINISHED'" (click)="activateSurvey(survey)">Activate</button>

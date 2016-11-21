@@ -8,6 +8,9 @@
         <li class="nav-item">
           <a [routerLink]="['/atps/new']" [routerLinkActive]="['activenav']" class="nav-link">New ATP</a>
         </li>
+        <li class="nav-item">
+          <a [routerLink]="['/atps/multi-picture']" [routerLinkActive]="['activenav']" class="nav-link">Multi-Picture ATP</a>
+        </li>
         <li class="nav-item" *ngIf="model.userRights.security">
           <a [routerLink]="['/atps/securityList']" [routerLinkActive]="['activenav']" class="nav-link">List security ATPs</a>
         </li>

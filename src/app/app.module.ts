@@ -36,6 +36,7 @@ import {CouponsPage} from "./user/coupons.component";
 import {CouponNewPage} from "./user/couponNew.component";
 import {CouponService} from "./services/coupon.service";
 import {DatePicker} from "ng2-datepicker/ng2-datepicker";
+import {MultiPictureATPPage} from "./myATPs/multiPictureATP.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {DatePicker} from "ng2-datepicker/ng2-datepicker";
     MyATPsPage,
     MyATPsListPage,
     MyATPsNewPage,
+    MultiPictureATPPage,
     MyATPsSecurityListPage,
     MyATPsSecurityNewPage,
     CommCenterPage,
