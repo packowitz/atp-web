@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let announce of announcements">
+  <li class="list-group-item list-group-item-action" [class.fake-link]="!announce.editMode" [class.light-grey-bg]="announce.editMode" *ngFor="let announce of announcements" (click)="announce.editMode = true">
     <small class="flex-space-between">
       <span>{{util.getTimeDiff(announce.sendDate)}} ago</span>
       <span>{{announce.sendDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
@@ -13,6 +13,10 @@
     <div class="placeholder-grey" *ngIf="announce.countries == 'ALL'">no restrictions</div>
     <h5 class="list-group-item-heading">#{{announce.id}} - {{announce.title}}</h5>
     <p class="list-group-item-text">{{announce.message}}</p>
+    <div *ngIf="announce.editMode" class="flex-space-around m-t-1">
+      <button class="btn btn-warning" (click)="announce.editMode = false; $event.stopPropagation()">Close Edit</button>
+      <button class="btn btn-danger" (click)="deleteAnnouncement(announce)">Delete</button>
+    </div>
   </li>
 </ul>
 <div class="m-a-2 text-xs-center">
