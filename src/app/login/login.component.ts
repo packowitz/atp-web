@@ -8,7 +8,7 @@ import {Model} from "../shared/model.component";
   templateUrl: './login.html'
 })
 export class LoginComponent {
-  username: string;
+  email: string;
   password: string;
   resolvingToken: boolean = false;
 
@@ -36,8 +36,8 @@ export class LoginComponent {
   }
 
   doLogin() {
-    if(this.username && this.username.length > 0 && this.password && this.password.length > 0) {
-      this.authService.login(this.username, this.password).subscribe(
+    if(this.email && this.email.length > 4 && this.password && this.password.length > 0) {
+      this.authService.login(this.email, this.password).subscribe(
         data => {
           this.localStorage.setToken(data.token);
           this.model.webuser = data.webuser;

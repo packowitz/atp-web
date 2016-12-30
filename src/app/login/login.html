@@ -4,16 +4,16 @@
   </div>
   <div class="m-t-2">
     <h3 class="text-muted">Welcome to Ask the People!</h3>
-    <h6 class="text-muted">Sign in with your ATP username</h6>
+    <h6 class="text-muted">Sign in with your email address</h6>
   </div>
   <div class="form-group m-t-2">
-    <input class="form-control" type="text" placeholder="username" [(ngModel)]="username" (keyup.enter)="doLogin()">
+    <input class="form-control" type="text" placeholder="email" [(ngModel)]="email" (keyup.enter)="doLogin()">
   </div>
   <div class="form-group">
     <input class="form-control" type="password" placeholder="password" [(ngModel)]="password" (keyup.enter)="doLogin()">
   </div>
   <div class="form-group">
-    <button type="button" class="btn btn-primary btn-lg btn-block" [disabled]="!username || !password" (click)="doLogin()">LOG IN</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" [disabled]="!email || !password" (click)="doLogin()">LOG IN</button>
   </div>
   <div class="flex-space-between">
     <span><a href="">Forgot password?</a></span>

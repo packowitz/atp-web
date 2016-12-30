@@ -24,10 +24,10 @@ export class AuthService {
 
     constructor(private http: Http, private localStorage: LocalStorage) {}
 
-    login(username: string, password: string): Observable<TokenAndUser> {
+    login(email: string, password: string): Observable<TokenAndUser> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(environment.server + "/web/auth/login", JSON.stringify({username: username, password: password}), {headers: headers}).map(res => res.json());
+        return this.http.post(environment.server + "/web/auth/login", JSON.stringify({email: email, password: password}), {headers: headers}).map(res => res.json());
     }
 
     resolveWebuser(): Observable<UserWithRights> {
