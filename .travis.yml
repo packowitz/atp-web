@@ -13,10 +13,14 @@ services:
 script:
   - ng build --prod
   - docker build -t pacworx/atp-web .
+  - rm -rf dist/
+  - ng build --env=test
+  - docker build -t pacworx/atp-web-test .
 
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker push pacworx/atp-web
+  - docker push pacworx/atp-web-test
 
 notifications:
   slack: pacworx:M2sZGPNSvxzvLD4XkaUF4oGI
