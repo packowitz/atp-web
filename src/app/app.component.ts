@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
-import {LocalStorage} from "./shared/localStorage.component";
-import {Model} from "./shared/model.component";
-import {Router} from "@angular/router";
+import {Component, ViewChild} from '@angular/core';
+import {Platform, NavController} from 'ionic-angular';
+import {LoadingPage} from "../pages/loading/loading";
+import {Model} from "../providers/services/model.service";
+import {ProfilePage} from "../pages/profile/profile";
+
 
 @Component({
-  selector: 'atp-app',
-  templateUrl: './app.component.html'
+  templateUrl: 'app.html'
 })
-export class AppComponent {
-  constructor(private router: Router, private model: Model, private localStorage: LocalStorage) {}
+export class AtpWebApp {
+  @ViewChild('content') nav: NavController;
+  rootPage = LoadingPage;
 
-  logout() {
-    this.model.webuser = null;
-    this.localStorage.setToken(null);
-    this.router.navigateByUrl('/login');
+  constructor(platform: Platform, public model: Model) {
+    platform.ready().then(() => {
+    });
+  }
+
+  showProfilePage() {
+    this.nav.push(ProfilePage);
   }
 }

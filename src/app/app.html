@@ -1,0 +1,38 @@
+<ion-menu side="left" persistent="true" [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="outer-content" *ngIf="model.webuser">
+    <ion-list>
+      <ion-list-header>{{model.webuser.username ? model.webuser.username : 'Me'}}</ion-list-header>
+      <ion-item-group>
+        <button ion-item menuClose (click)="showProfilePage()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>Personal data</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>ATP</ion-list-header>
+      <ion-item-group>
+        <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
+        <button ion-item menuClose (click)="showHighscorePage()"><ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
+        <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
+        <button ion-item menuClose (click)="showAboutPage()"><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>Feedback</ion-list-header>
+      <ion-item-group>
+        <button ion-item menuClose (click)="showImprovementPage()"><ion-icon item-left color="atp-blue" name="bulb"></ion-icon>Write an improvement</button>
+        <button ion-item menuClose (click)="showBugReportPage()"><ion-icon item-left name="bug"></ion-icon>Report a Bug</button>
+        <button ion-item menuClose (click)="showMessageSuggestionPage()"><ion-icon item-left name="mail"></ion-icon>Suggest a message</button>
+        <button ion-item menuClose (click)="showOtherFeedbackPage()"><ion-icon item-left name="paper"></ion-icon>Other feedback</button>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content></ion-nav>

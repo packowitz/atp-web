@@ -1,88 +1,53 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
-import {Util} from "./services/util.service";
-import {SurveyService} from "./services/survey.service";
-import {NotificationService, Notification} from "./services/notification.service";
-import {Model} from "./shared/model.component";
-import {LocalStorage} from "./shared/localStorage.component";
-import {CountryService} from "./services/country.service";
-import {CommCenterService} from "./services/commCenter.service";
-import {CcModel} from "./commCenter/ccModel.component";
-import {AuthService} from "./services/auth.service";
-import {AuthGuard} from "./services/auth-guard.service";
-import {routing} from "./app.routes";
-import {ProfilePage} from "./profile/profile.component";
-import {AnnouncementsPage, CountrySplitPipe} from "./commCenter/announcements.component";
-import {FeedbackPage} from "./commCenter/feedback.component";
-import {CallcenterHomePage} from "./commCenter/ccHome.component";
-import {CommCenterPage} from "./commCenter/commCenter.component";
-import {MyATPsSecurityNewPage} from "./myATPs/myATPsSecurityNew.component";
-import {MyATPsSecurityListPage} from "./myATPs/myATPsSecurityList.component";
-import {MyATPsNewPage} from "./myATPs/myATPsNew.component";
-import {MyATPsListPage} from "./myATPs/myATPsList.component";
-import {MyATPsPage} from "./myATPs/myATPs.component";
-import {WelcomePage} from "./welcome/welcome.component";
-import {LoginComponent} from "./login/login.component";
-import {CreateAtp} from "./myATPs/createAtp.component";
-import {AtpListings} from "./myATPs/atpListings.component";
-import {Observable} from "rxjs/Rx";
-import {UserPage} from "./user/user.component";
-import {UserOverviewPage} from "./user/userOverview.component";
-import {CouponsPage} from "./user/coupons.component";
-import {CouponNewPage} from "./user/couponNew.component";
-import {CouponService} from "./services/coupon.service";
-import {DatePicker} from "ng2-datepicker/ng2-datepicker";
-import {MultiPictureATPPage} from "./myATPs/multiPictureATP.component";
+import {NgModule, ErrorHandler} from '@angular/core';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {AtpWebApp} from './app.component';
+import {LoginPage} from "../pages/login/login";
+import {LoadingPage} from "../pages/loading/loading";
+import {Model} from "../providers/services/model.service";
+import {AtpHttp} from "../providers/services/atpHttp.service";
+import {UserService} from "../providers/services/user.service";
+import {NotificationService} from "../providers/services/notification.service";
+import {CountryService} from "../providers/services/country.service";
+import {LocalStorage} from "../providers/services/localStorage.service";
+import {LoadingState} from "../pages/loading/loadingState";
+import {Storage} from "@ionic/storage";
+import {SurveyService} from "../providers/services/survey.service";
+import {AdminHomePage} from "../pages/adminHome/adminHome";
+import {UserHomePage} from "../pages/userHome/userHome";
+import {ProfilePage} from "../pages/profile/profile";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AtpListings,
-    CreateAtp,
-    LoginComponent,
-    WelcomePage,
-    MyATPsPage,
-    MyATPsListPage,
-    MyATPsNewPage,
-    MultiPictureATPPage,
-    MyATPsSecurityListPage,
-    MyATPsSecurityNewPage,
-    CommCenterPage,
-    CallcenterHomePage,
-    FeedbackPage,
-    AnnouncementsPage,
-    UserPage,
-    UserOverviewPage,
-    CouponsPage,
-    CouponNewPage,
+    AdminHomePage,
+    AtpWebApp,
+    LoginPage,
+    LoadingPage,
     ProfilePage,
-    Notification,
-    CountrySplitPipe,
-    DatePicker
+    UserHomePage
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    routing
+    IonicModule.forRoot(AtpWebApp)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    AdminHomePage,
+    AtpWebApp,
+    LoginPage,
+    LoadingPage,
+    ProfilePage,
+    UserHomePage
   ],
   providers: [
-    AuthGuard,
-    AuthService,
-    CcModel,
-    CommCenterService,
+    AtpHttp,
     CountryService,
-    CouponService,
+    LoadingState,
     LocalStorage,
     Model,
     NotificationService,
+    Storage,
     SurveyService,
-    Util
-  ],
-  bootstrap: [AppComponent]
+    UserService,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
-export class AppModule { }
+export class AppModule {}
