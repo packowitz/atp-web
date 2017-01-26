@@ -7,29 +7,51 @@
 
   <ion-content class="outer-content" *ngIf="model.webuser">
     <ion-list>
-      <ion-list-header>{{model.webuser.username ? model.webuser.username : 'Me'}}</ion-list-header>
       <ion-item-group>
+        <ion-item><div class="color-grey">{{model.webuser.username ? model.webuser.username : 'Me'}}</div></ion-item>
         <button ion-item menuClose (click)="showProfilePage()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>Personal data</button>
       </ion-item-group>
     </ion-list>
 
     <ion-list>
-      <ion-list-header>ATP</ion-list-header>
       <ion-item-group>
-        <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
-        <button ion-item menuClose (click)="showHighscorePage()"><ion-icon item-left color="atp-gold" name="trophy"></ion-icon>Highscores</button>
-        <button ion-item menuClose (click)="showSettings()"><ion-icon item-left name="settings"></ion-icon>Settings</button>
-        <button ion-item menuClose (click)="showAboutPage()"><ion-icon item-left name="information-circle" color="atp-placeholder-grey"></ion-icon>About</button>
+        <ion-item><div class="color-grey">ATPs</div></ion-item>
+        <button ion-item menuClose (click)="createAtp()"><ion-icon item-left name="add"></ion-icon>Create ATP</button>
+        <button ion-item menuClose (click)="listMyAtps()"><ion-icon item-left name="list"></ion-icon>My ATPs</button>
+        <button *ngIf="model.userRights.security" ion-item menuClose (click)="createSecurityAtp()"><ion-icon item-left name="lock"></ion-icon>Create Security ATP</button>
+        <button *ngIf="model.userRights.security" ion-item menuClose (click)="listSecurityAtps()"><ion-icon item-left name="list-box"></ion-icon>List Security ATPs</button>
       </ion-item-group>
     </ion-list>
 
-    <ion-list>
-      <ion-list-header>Feedback</ion-list-header>
+    <ion-list *ngIf="model.userRights.coupons || model.userRights.userAdmin">
       <ion-item-group>
-        <button ion-item menuClose (click)="showImprovementPage()"><ion-icon item-left color="atp-blue" name="bulb"></ion-icon>Write an improvement</button>
-        <button ion-item menuClose (click)="showBugReportPage()"><ion-icon item-left name="bug"></ion-icon>Report a Bug</button>
-        <button ion-item menuClose (click)="showMessageSuggestionPage()"><ion-icon item-left name="mail"></ion-icon>Suggest a message</button>
-        <button ion-item menuClose (click)="showOtherFeedbackPage()"><ion-icon item-left name="paper"></ion-icon>Other feedback</button>
+        <ion-item><div class="color-grey">User Management</div></ion-item>
+        <button *ngIf="model.userRights.coupons" ion-item menuClose (click)="showCoupons()"><ion-icon item-left name="card"></ion-icon>Coupons</button>
+        <button *ngIf="model.userRights.userAdmin" ion-item menuClose (click)="showUsers()"><ion-icon item-left name="people"></ion-icon>Users</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list *ngIf="model.userRights.callcenter">
+      <ion-item-group>
+        <ion-item><div class="color-grey">Feedback</div></ion-item>
+        <button ion-item menuClose (click)="showImprovements()"><ion-icon item-left name="bulb"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openImprovements > 0">{{model.openImprovements}}</ion-badge>Improvements
+        </button>
+        <button ion-item menuClose (click)="showBugs()"><ion-icon item-left name="bug"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openBugs > 0">{{model.openBugs}}</ion-badge>Bugs
+        </button>
+        <button ion-item menuClose (click)="showMessageSuggestions()"><ion-icon item-left name="mail"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openMessages > 0">{{model.openMessages}}</ion-badge>Message Suggestions
+        </button>
+        <button ion-item menuClose (click)="showOtherFeedback()"><ion-icon item-left name="paper"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openOthers > 0">{{model.openOthers}}</ion-badge>Other feedback
+        </button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list *ngIf="model.userRights.marketing">
+      <ion-item-group>
+        <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
       </ion-item-group>
     </ion-list>
   </ion-content>

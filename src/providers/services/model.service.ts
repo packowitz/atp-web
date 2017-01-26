@@ -11,6 +11,12 @@ export class Model {
   public userRights: UserRights;
   public surveyTypes: SurveyType[] = [];
 
+  public openImprovements: number = 0;
+  public openBugs: number = 0;
+  public openMessages: number = 0;
+  public openKudos: number = 0;
+  public openOthers: number = 0;
+
 
   constructor() {
     this.surveyTypes = [

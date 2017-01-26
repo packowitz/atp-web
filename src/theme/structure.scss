@@ -1,6 +1,9 @@
+@import "colors";
+
 body {
   display: flex;
   justify-content: center;
+  background-color: $atp-light-grey3;
 }
 
 .app-content {

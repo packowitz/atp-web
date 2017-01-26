@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular";
+import {NavController} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {CountryService} from "../../providers/services/country.service";
 import {LocalStorage} from "../../providers/services/localStorage.service";
@@ -8,6 +8,7 @@ import {LoginPage} from "../login/login";
 import {UserService} from "../../providers/services/user.service";
 import {AdminHomePage} from "../adminHome/adminHome";
 import {UserHomePage} from "../userHome/userHome";
+import {FeedbackService} from "../../providers/services/feedback.service";
 
 
 @Component({
@@ -20,8 +21,8 @@ export class LoadingPage {
               public userService: UserService,
               public countryService: CountryService,
               public model: Model,
-              public platform: Platform,
-              public localStorage: LocalStorage) {
+              public localStorage: LocalStorage,
+              public feedbackService: FeedbackService) {
     this.loadDataFromServer();
   }
 
@@ -32,6 +33,8 @@ export class LoadingPage {
       this.loadCountries();
     } else if(!this.state.loadedUser) {
       this.loadUser();
+    } else if(!this.state.loadedFeedback) {
+      this.loadFeedback();
     } else {
       this.nav.setRoot(this.model.isAdmin() ? AdminHomePage : UserHomePage);
     }
@@ -77,5 +80,13 @@ export class LoadingPage {
         this.loadDataFromServer();
       }
     );
+  }
+
+  loadFeedback() {
+    if(this.model.userRights.callcenter) {
+      this.feedbackService.enableUpdateOpenFeedbackInterval();
+    }
+    this.state.loadedFeedback = true;
+    this.loadDataFromServer();
   }
 }

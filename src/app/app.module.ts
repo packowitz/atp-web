@@ -15,11 +15,17 @@ import {SurveyService} from "../providers/services/survey.service";
 import {AdminHomePage} from "../pages/adminHome/adminHome";
 import {UserHomePage} from "../pages/userHome/userHome";
 import {ProfilePage} from "../pages/profile/profile";
+import {FeedbackService} from "../providers/services/feedback.service";
+import {FeedbackPage} from "../pages/feedback/feedback";
+import {Util} from "../providers/services/util.service";
+import {AnnouncementPage} from "../pages/announcement/announcement";
 
 @NgModule({
   declarations: [
     AdminHomePage,
+    AnnouncementPage,
     AtpWebApp,
+    FeedbackPage,
     LoginPage,
     LoadingPage,
     ProfilePage,
@@ -31,7 +37,9 @@ import {ProfilePage} from "../pages/profile/profile";
   bootstrap: [IonicApp],
   entryComponents: [
     AdminHomePage,
+    AnnouncementPage,
     AtpWebApp,
+    FeedbackPage,
     LoginPage,
     LoadingPage,
     ProfilePage,
@@ -40,6 +48,7 @@ import {ProfilePage} from "../pages/profile/profile";
   providers: [
     AtpHttp,
     CountryService,
+    FeedbackService,
     LoadingState,
     LocalStorage,
     Model,
@@ -47,6 +56,7 @@ import {ProfilePage} from "../pages/profile/profile";
     Storage,
     SurveyService,
     UserService,
+    Util,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
