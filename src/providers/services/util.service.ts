@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Country} from "../domain/country";
+import {Country} from "../domain/country.model";
 
 @Injectable()
 export class Util {

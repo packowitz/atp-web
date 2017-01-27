@@ -1,0 +1,9 @@
+.fake-link {
+  cursor: pointer;
+}
+
+.action-item {
+  &:hover {
+    background-color: $atp-light-grey4;
+  }
+}

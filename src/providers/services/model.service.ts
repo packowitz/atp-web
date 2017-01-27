@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Webuser} from "../domain/webuser";
-import {UserRights} from "../domain/userRights";
-import {SurveyType} from "../domain/surveyType";
+import {Webuser} from "../domain/webuser.model";
+import {UserRights} from "../domain/user-rights.model";
+import {SurveyType} from "../domain/survey-type.model";
 
 @Injectable()
 export class Model {

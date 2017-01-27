@@ -1,8 +1,8 @@
-import {AtpHttp} from "./atpHttp.service";
+import {AtpHttp} from "./atp-http.service";
 import {Injectable} from "@angular/core";
 import {Model} from "./model.service";
 import {Observable} from "rxjs";
-import {Feedback} from "../domain/feedback";
+import {Feedback} from "../domain/feedback.model";
 
 @Injectable()
 export class FeedbackService {

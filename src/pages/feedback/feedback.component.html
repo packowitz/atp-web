@@ -27,7 +27,7 @@
     </ion-segment-button>
   </ion-segment>
   <ion-list *ngIf="feedbackList">
-    <ion-item *ngFor="let feedback of feedbackList">
+    <ion-item *ngFor="let feedback of feedbackList" class="fake-link action-item">
       <div>
         <small class="flex-space-between mb2">
           <span>{{util.getTimeDiff(feedback.lastActionDate)}} ago</span>

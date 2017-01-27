@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {Webuser} from "../domain/webuser";
-import {UserRights} from "../domain/userRights";
-import {AtpHttp} from "./atpHttp.service";
+import {Webuser} from "../domain/webuser.model";
+import {UserRights} from "../domain/user-rights.model";
+import {AtpHttp} from "./atp-http.service";
 
 export class TokenAndUser {
   token: string;

@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {UserService} from "../../providers/services/user.service";
-import {LocalStorage} from "../../providers/services/localStorage.service";
+import {LocalStorage} from "../../providers/services/local-storage.service";
 import {Model} from "../../providers/services/model.service";
 import {NavController} from "ionic-angular";
-import {LoadingPage} from "../loading/loading";
+import {LoadingPage} from "../loading/loading.component";
 
 @Component({
-  templateUrl: './login.html'
+  templateUrl: 'login.component.html'
 })
 export class LoginPage {
   email: string;

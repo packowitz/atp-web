@@ -1,6 +1,6 @@
-import {Webuser} from "./webuser";
-import {FeedbackAnswer} from "./feedbackAnswer";
-import {FeedbackConversation} from "./feedbackConversation";
+import {Webuser} from "./webuser.model";
+import {FeedbackAnswer} from "./feedback-answer.model";
+import {FeedbackConversation} from "./feedback-conversation.model";
 
 export class Feedback {
   id: number;

@@ -1,11 +1,11 @@
 import {Component} from "@angular/core";
 import {FeedbackService} from "../../providers/services/feedback.service";
 import {NavParams, NavController} from "ionic-angular";
-import {Feedback} from "../../providers/domain/feedback";
+import {Feedback} from "../../providers/domain/feedback.model";
 import {Util} from "../../providers/services/util.service";
 
 @Component({
-  templateUrl: './feedback.html'
+  templateUrl: 'feedback.component.html'
 })
 export class FeedbackPage {
 

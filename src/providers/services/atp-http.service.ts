@@ -4,9 +4,9 @@ import {Headers, Http} from "@angular/http";
 import {Model} from "./model.service";
 import {NotificationService} from "./notification.service";
 import {AlertController, Alert, NavController} from "ionic-angular";
-import {LocalStorage} from "./localStorage.service";
-import {LoadingState} from "../../pages/loading/loadingState";
-import {LoadingPage} from "../../pages/loading/loading";
+import {LocalStorage} from "./local-storage.service";
+import {LoadingState} from "../../pages/loading/loading-state.model";
+import {LoadingPage} from "../../pages/loading/loading.component";
 
 @Injectable()
 export class AtpHttp {

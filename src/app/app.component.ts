@@ -1,14 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, NavController} from 'ionic-angular';
-import {LoadingPage} from "../pages/loading/loading";
+import {LoadingPage} from "../pages/loading/loading.component";
 import {Model} from "../providers/services/model.service";
-import {ProfilePage} from "../pages/profile/profile";
-import {FeedbackPage} from "../pages/feedback/feedback";
-import {AnnouncementPage} from "../pages/announcement/announcement";
+import {ProfilePage} from "../pages/profile/profile.component";
+import {FeedbackPage} from "../pages/feedback/feedback.component";
+import {AnnouncementPage} from "../pages/announcement/announcement.component";
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.component.html'
 })
 export class AtpWebApp {
   @ViewChild('content') nav: NavController;

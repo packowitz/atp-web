@@ -2,17 +2,17 @@ import {Component} from "@angular/core";
 import {NavController} from "ionic-angular";
 import {Model} from "../../providers/services/model.service";
 import {CountryService} from "../../providers/services/country.service";
-import {LocalStorage} from "../../providers/services/localStorage.service";
-import {LoadingState} from "./loadingState";
-import {LoginPage} from "../login/login";
+import {LocalStorage} from "../../providers/services/local-storage.service";
+import {LoadingState} from "./loading-state.model";
+import {LoginPage} from "../login/login.component";
 import {UserService} from "../../providers/services/user.service";
-import {AdminHomePage} from "../adminHome/adminHome";
-import {UserHomePage} from "../userHome/userHome";
+import {AdminHomePage} from "../adminHome/admin-home.component";
+import {UserHomePage} from "../userHome/user-home.component";
 import {FeedbackService} from "../../providers/services/feedback.service";
 
 
 @Component({
-  templateUrl: 'loading.html'
+  templateUrl: 'loading.component.html'
 })
 export class LoadingPage {
 

@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 
 @Component({
-  templateUrl: './profile.html'
+  templateUrl: 'profile.component.html'
 })
 export class ProfilePage {
 
