@@ -2,6 +2,14 @@
   cursor: pointer;
 }
 
+.flag-list {
+  img {
+    height: 1.2em;
+    width: auto;
+    border: 1px black solid;
+  }
+}
+
 .action-item {
   &:hover {
     background-color: $atp-light-grey4;

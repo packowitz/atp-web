@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Write announcement</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Effected countries</ion-label>
+      <ion-select [(ngModel)]="selectedCountries" multiple="true" cancelText="Cancel" okText="OK">
+        <ion-option *ngFor="let country of allCountries" [value]="country">{{country.nameEng}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-input type="text" placeholder="Title" [(ngModel)]="announcement.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <textarea class="full-width" rows="4" [(ngModel)]="announcement.message"></textarea>
+  </ion-item>
+  <div class="flex-center mt2">
+    <button ion-button (click)="postAnnouncement()" [disabled]="!announcement.title || !announcement.message">Send</button>
+  </div>
+</ion-content>

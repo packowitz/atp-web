@@ -20,18 +20,25 @@ import {FeedbackPage} from "../pages/feedback/feedback.component";
 import {Util} from "../providers/services/util.service";
 import {AnnouncementPage} from "../pages/announcement/announcement.component";
 import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
+import {AnnouncementService} from "../providers/services/announcement.service";
+import {CountrySplitPipe} from "../providers/pipes/country-split.pipe";
+import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.component";
 
 @NgModule({
   declarations: [
+    AtpWebApp,
+
     AdminHomePage,
     AnnouncementPage,
-    AtpWebApp,
+    CreateAnnouncementPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
     LoadingPage,
     ProfilePage,
-    UserHomePage
+    UserHomePage,
+
+    CountrySplitPipe
   ],
   imports: [
     IonicModule.forRoot(AtpWebApp)
@@ -41,6 +48,7 @@ import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
     AdminHomePage,
     AnnouncementPage,
     AtpWebApp,
+    CreateAnnouncementPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
@@ -49,6 +57,7 @@ import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
     UserHomePage
   ],
   providers: [
+    AnnouncementService,
     AtpHttp,
     CountryService,
     FeedbackService,

@@ -15,5 +15,35 @@
 </ion-header>
 
 <ion-content padding>
-  Here comes the announcements
+  <div *ngIf="announcements">
+    <ion-card *ngFor="let announcement of announcements">
+      <ion-card-header>
+        <small class="flex-space-between mb1">
+          <span>{{util.getTimeDiff(announcement.sendDate)}} ago</span>
+          <span>{{announcement.sendDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+          <span>User #{{announcement.adminId}}</span>
+        </small>
+        <div *ngIf="announcement.countries != 'ALL'" class="flag-list flex-start">
+          <span *ngFor="let country of announcement.countries | countrySplit" class="mr1">
+            <img src="assets/img/flags/{{country.alpha3}}.png" title="{{country.nameEng}}">
+          </span>
+        </div>
+        <div class="color-placeholder" *ngIf="announcement.countries == 'ALL'">no country restriction</div>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <strong>#{{announcement.id}} - {{announcement.title}}</strong>
+        </div>
+        <div>{{announcement.message}}</div>
+        <div class="flex-end">
+          <button ion-button small color="danger" (click)="deleteAnnouncement(announcement)">delete</button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <div class="flex-center">
+      <button ion-button (click)="newAnnoucement()">Write an announcement</button>
+    </div>
+  </div>
 </ion-content>
+
+

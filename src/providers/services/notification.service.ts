@@ -27,6 +27,15 @@ export class NotificationService {
     }
   }
 
+  showDefaultToast(message: string) {
+    this.showToast({
+      message: message,
+      duration: 3000,
+      showCloseButton: true,
+      closeButtonText: 'OK'
+    });
+  }
+
   showToast(options: any) {
     this.toast = this.toastController.create(options);
     this.toast.present();
