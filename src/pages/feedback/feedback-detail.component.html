@@ -24,7 +24,7 @@
         {{conversation.feedback.message}}
       </ion-card-content>
     </ion-card>
-    <ion-card *ngFor="let answer of conversation.answers">
+    <ion-card *ngFor="let answer of conversation.answers" [class.background-light-grey]="answer.adminAnswer">
       <ion-card-header>
         <small *ngIf="!answer.adminAnswer" class="float-right">
           {{conversation.user.username ? conversation.user.username : 'anonymous'}} #{{conversation.user.id}} wrote on {{answer.sendDate | date:'dd/MM/yyyy HH:mm'}}
