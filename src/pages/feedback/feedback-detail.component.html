@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="conversation">#{{conversation.feedback.id}} - {{conversation.feedback.title}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="conversation">
+    <ion-card>
+      <ion-card-header class="small-headline no-padding-bottom">
+        <small class="float-right">
+          {{conversation.user.username ? conversation.user.username : 'anonymous'}} #{{conversation.user.id}} wrote this
+          <span *ngIf="conversation.feedback.type == 'IMPROVEMENT'">Improvement idea</span>
+          <span *ngIf="conversation.feedback.type == 'BUG_REPORT'">Bug Report</span>
+          <span *ngIf="conversation.feedback.type == 'MESSAGE_SUGGESTION'">Message Suggestion</span>
+          <span *ngIf="conversation.feedback.type == 'OTHER'">Feedback</span>
+          on {{conversation.feedback.sendDate | date:'dd/MM/yyyy HH:mm'}}
+        </small>
+      </ion-card-header>
+      <ion-card-content>
+        {{conversation.feedback.message}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let answer of conversation.answers">
+      <ion-card-header>
+        <small *ngIf="!answer.adminAnswer" class="float-right">
+          {{conversation.user.username ? conversation.user.username : 'anonymous'}} #{{conversation.user.id}} wrote on {{answer.sendDate | date:'dd/MM/yyyy HH:mm'}}
+        </small>
+        <small *ngIf="answer.adminAnswer">ATP-Team (#{{answer.adminId}}) answered on {{answer.sendDate | date:'dd/MM/yyyy HH:mm'}}</small>
+      </ion-card-header>
+      <ion-card-content>
+        {{answer.message}}
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="feedback.status == 'CLOSED'">
+      <ion-card-content>
+        <ion-icon name="lock"></ion-icon> This conversation is closed.
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="feedback.status != 'CLOSED'">
+      <ion-card-header>
+        <div class="flex-space-between">
+          Write a new answer
+          <span>
+            {{newAnswer ? 255 - newAnswer.length : 255}} chars left
+          </span>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+        <textarea [(ngModel)]="newAnswer" maxlength="255" rows="4" class="full-width"></textarea>
+        <div class="flex-space-around">
+          <button ion-button (click)="sendAnswer(false)" [disabled]="!newAnswer || newAnswer.length == 0">Send</button>
+          <button ion-button (click)="sendAnswer(true)" [disabled]="!newAnswer || newAnswer.length == 0">Send and Close</button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

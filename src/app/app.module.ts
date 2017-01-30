@@ -19,12 +19,14 @@ import {FeedbackService} from "../providers/services/feedback.service";
 import {FeedbackPage} from "../pages/feedback/feedback.component";
 import {Util} from "../providers/services/util.service";
 import {AnnouncementPage} from "../pages/announcement/announcement.component";
+import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
 
 @NgModule({
   declarations: [
     AdminHomePage,
     AnnouncementPage,
     AtpWebApp,
+    FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
     LoadingPage,
@@ -39,6 +41,7 @@ import {AnnouncementPage} from "../pages/announcement/announcement.component";
     AdminHomePage,
     AnnouncementPage,
     AtpWebApp,
+    FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
     LoadingPage,

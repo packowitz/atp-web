@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {Model} from "./model.service";
 import {Observable} from "rxjs";
 import {Feedback} from "../domain/feedback.model";
+import {FeedbackConversation} from "../domain/feedback-conversation.model";
 
 @Injectable()
 export class FeedbackService {
@@ -28,7 +29,20 @@ export class FeedbackService {
   }
 
   listFeedback(type: string, status: string): Observable<Feedback[]> {
-    return this.atpHttp.doGet("/web/app/cc/list/feedback/" + type + "/" + status, "Loading Feedback");
+    return this.atpHttp.doGet("/web/app/cc/list/feedback/" + type + "/" + status, "loading feedback");
+  }
+
+  getConversation(id: number): Observable<FeedbackConversation> {
+    return this.atpHttp.doGet("/web/app/cc/conversation/" + id, "loading details");
+  }
+
+  sendFeedbackAnswer(id: number, message: string, close: boolean): Observable<Feedback> {
+    let answer = {
+      feedbackId: id,
+      message: message,
+      close: close
+    };
+    return this.atpHttp.doPost("/web/app/cc/feedback/answer", answer, "sending answer");
   }
 
 }

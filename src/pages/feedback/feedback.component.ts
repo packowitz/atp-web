@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 import {FeedbackService} from "../../providers/services/feedback.service";
-import {NavParams, NavController} from "ionic-angular";
+import {NavParams, NavController, ModalController} from "ionic-angular";
 import {Feedback} from "../../providers/domain/feedback.model";
 import {Util} from "../../providers/services/util.service";
+import {FeedbackDetailPage} from "./feedback-detail.component";
 
 @Component({
   templateUrl: 'feedback.component.html'
@@ -18,7 +19,8 @@ export class FeedbackPage {
   constructor(public navParams: NavParams,
               public feedbackService: FeedbackService,
               public util: Util,
-              public nav: NavController) {
+              public nav: NavController,
+              public modalCtrl: ModalController) {
     this.type = navParams.get('type');
     this.status = navParams.get('status');
     if(this.type == 'IMPROVEMENT') {
@@ -45,5 +47,9 @@ export class FeedbackPage {
 
   showClosed() {
     this.nav.push(FeedbackPage, {type: this.type, status: 'CLOSED'});
+  }
+
+  showFeedbackDetail(feedback: Feedback) {
+    this.modalCtrl.create(FeedbackDetailPage, {feedback: feedback}).present();
   }
 }
