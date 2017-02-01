@@ -7,9 +7,9 @@ import {ModalController, Modal} from "ionic-angular";
 import {CreateAnnouncementPage} from "./create-announcement.component";
 
 @Component({
-  templateUrl: 'announcement.component.html'
+  templateUrl: 'announcements.component.html'
 })
-export class AnnouncementPage {
+export class AnnouncementsPage {
 
   announcements: Announcement[];
 
@@ -21,7 +21,7 @@ export class AnnouncementPage {
   }
 
   deleteAnnouncement(announcement: Announcement) {
-    if(window.confirm("Are you sure to delete this announcement?")) {
+    if(window.confirm("Are you sure to delete this announcements?")) {
       this.announcementService.deleteAnnouncement(announcement).subscribe(
         () => {
           let idx = this.announcements.indexOf(announcement);

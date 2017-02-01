@@ -5,9 +5,9 @@ import {CreateCouponPage} from "./create-coupon.component";
 import {ModalController, Modal} from "ionic-angular";
 
 @Component({
-  templateUrl: 'coupon.component.html'
+  templateUrl: 'coupons.component.html'
 })
-export class CouponPage {
+export class CouponsPage {
   coupons: Coupon[];
 
   constructor(public couponService: CouponService,

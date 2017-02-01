@@ -16,10 +16,8 @@
     <ion-list>
       <ion-item-group>
         <ion-item><div class="color-grey">ATPs</div></ion-item>
-        <button ion-item menuClose (click)="createAtp()"><ion-icon item-left name="add"></ion-icon>Create ATP</button>
-        <button ion-item menuClose (click)="listMyAtps()"><ion-icon item-left name="list"></ion-icon>My ATPs</button>
-        <button *ngIf="model.userRights.security" ion-item menuClose (click)="createSecurityAtp()"><ion-icon item-left name="lock"></ion-icon>Create Security ATP</button>
-        <button *ngIf="model.userRights.security" ion-item menuClose (click)="listSecurityAtps()"><ion-icon item-left name="list-box"></ion-icon>List Security ATPs</button>
+        <button ion-item menuClose (click)="showMyAtps()"><ion-icon item-left name="list"></ion-icon>My ATPs</button>
+        <button *ngIf="model.userRights.security" ion-item menuClose (click)="showSecurityAtps()"><ion-icon item-left name="lock"></ion-icon>Security ATPs</button>
       </ion-item-group>
     </ion-list>
 

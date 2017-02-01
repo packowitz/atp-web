@@ -18,30 +18,36 @@ import {ProfilePage} from "../pages/profile/profile.component";
 import {FeedbackService} from "../providers/services/feedback.service";
 import {FeedbackPage} from "../pages/feedback/feedback.component";
 import {Util} from "../providers/services/util.service";
-import {AnnouncementPage} from "../pages/announcement/announcement.component";
+import {AnnouncementsPage} from "../pages/announcements/announcements.component";
 import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
 import {AnnouncementService} from "../providers/services/announcement.service";
 import {CountrySplitPipe} from "../providers/pipes/country-split.pipe";
-import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.component";
-import {CouponPage} from "../pages/coupon/coupon.component";
+import {CreateAnnouncementPage} from "../pages/announcements/create-announcement.component";
+import {CouponsPage} from "../pages/coupons/coupons.component";
 import {CouponService} from "../providers/services/coupon.service";
-import {CreateCouponPage} from "../pages/coupon/create-coupon.component";
+import {CreateCouponPage} from "../pages/coupons/create-coupon.component";
+import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
+import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
+import {UsersPage} from "../pages/users/users.component";
 
 @NgModule({
   declarations: [
     AtpWebApp,
 
     AdminHomePage,
-    AnnouncementPage,
-    CouponPage,
+    AnnouncementsPage,
+    CouponsPage,
     CreateAnnouncementPage,
     CreateCouponPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
     LoadingPage,
+    MySurveysPage,
     ProfilePage,
+    SecuritySurveyPage,
     UserHomePage,
+    UsersPage,
 
     CountrySplitPipe
   ],
@@ -51,17 +57,20 @@ import {CreateCouponPage} from "../pages/coupon/create-coupon.component";
   bootstrap: [IonicApp],
   entryComponents: [
     AdminHomePage,
-    AnnouncementPage,
+    AnnouncementsPage,
     AtpWebApp,
-    CouponPage,
+    CouponsPage,
     CreateAnnouncementPage,
     CreateCouponPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
     LoadingPage,
+    MySurveysPage,
     ProfilePage,
-    UserHomePage
+    SecuritySurveyPage,
+    UserHomePage,
+    UsersPage
   ],
   providers: [
     AnnouncementService,

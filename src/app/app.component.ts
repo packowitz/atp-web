@@ -4,8 +4,11 @@ import {LoadingPage} from "../pages/loading/loading.component";
 import {Model} from "../providers/services/model.service";
 import {ProfilePage} from "../pages/profile/profile.component";
 import {FeedbackPage} from "../pages/feedback/feedback.component";
-import {AnnouncementPage} from "../pages/announcement/announcement.component";
-import {CouponPage} from "../pages/coupon/coupon.component";
+import {AnnouncementsPage} from "../pages/announcements/announcements.component";
+import {CouponsPage} from "../pages/coupons/coupons.component";
+import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
+import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
+import {UsersPage} from "../pages/users/users.component";
 
 
 @Component({
@@ -41,10 +44,22 @@ export class AtpWebApp {
   }
 
   showAnnouncements() {
-    this.nav.push(AnnouncementPage);
+    this.nav.push(AnnouncementsPage);
   }
 
   showCoupons() {
-    this.nav.push(CouponPage);
+    this.nav.push(CouponsPage);
+  }
+
+  showSecurityAtps() {
+    this.nav.push(SecuritySurveyPage);
+  }
+
+  showMyAtps() {
+    this.nav.push(MySurveysPage);
+  }
+
+  showUsers() {
+    this.nav.push(UsersPage);
   }
 }
