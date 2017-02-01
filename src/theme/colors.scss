@@ -21,6 +21,14 @@ $atp-orange: #ff953a;
   color: $atp-grey;
 }
 
+.color-active {
+  color: $atp-green-success;
+}
+
+.color-inactive {
+  color: $atp-red;
+}
+
 .color-placeholder {
   color: $atp-placeholder-grey;
 }

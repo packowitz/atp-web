@@ -5,6 +5,7 @@ import {Model} from "../providers/services/model.service";
 import {ProfilePage} from "../pages/profile/profile.component";
 import {FeedbackPage} from "../pages/feedback/feedback.component";
 import {AnnouncementPage} from "../pages/announcement/announcement.component";
+import {CouponPage} from "../pages/coupon/coupon.component";
 
 
 @Component({
@@ -41,5 +42,9 @@ export class AtpWebApp {
 
   showAnnouncements() {
     this.nav.push(AnnouncementPage);
+  }
+
+  showCoupons() {
+    this.nav.push(CouponPage);
   }
 }

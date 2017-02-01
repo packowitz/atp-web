@@ -23,6 +23,9 @@ import {FeedbackDetailPage} from "../pages/feedback/feedback-detail.component";
 import {AnnouncementService} from "../providers/services/announcement.service";
 import {CountrySplitPipe} from "../providers/pipes/country-split.pipe";
 import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.component";
+import {CouponPage} from "../pages/coupon/coupon.component";
+import {CouponService} from "../providers/services/coupon.service";
+import {CreateCouponPage} from "../pages/coupon/create-coupon.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.
 
     AdminHomePage,
     AnnouncementPage,
+    CouponPage,
     CreateAnnouncementPage,
+    CreateCouponPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
@@ -48,7 +53,9 @@ import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.
     AdminHomePage,
     AnnouncementPage,
     AtpWebApp,
+    CouponPage,
     CreateAnnouncementPage,
+    CreateCouponPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
@@ -60,6 +67,7 @@ import {CreateAnnouncementPage} from "../pages/announcement/create-announcement.
     AnnouncementService,
     AtpHttp,
     CountryService,
+    CouponService,
     FeedbackService,
     LoadingState,
     LocalStorage,
