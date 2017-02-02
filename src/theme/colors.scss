@@ -2,6 +2,7 @@ $atp-light: #f9f9f9;
 $atp-gold: #d2ce0f;
 $atp-danger: #c70c13;
 $atp-blue-light: #659dd2;
+$atp-mid-blue: #3e85c7;
 $atp-blue: #3e85c7;
 $atp-blue-dark: #134c7d;
 $atp-light-blue: #ddefff;
@@ -13,12 +14,17 @@ $atp-light-grey4: #dedede;
 $atp-dark-grey2: #97adc1;
 $atp-placeholder-grey: #acacac;
 $atp-dark-text: #646f79;
+$atp-green-light: #249c0f;
 $atp-green-success: #7ed321;
 $atp-red: #d0021b;
 $atp-orange: #ff953a;
 
 .color-grey {
   color: $atp-grey;
+}
+
+.color-light {
+  color: $atp-light-grey;
 }
 
 .color-active {

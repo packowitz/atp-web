@@ -8,6 +8,7 @@ $font-path: "../assets/fonts";
 @import "flex";
 @import "ionic-fixes";
 @import "common";
+@import "responsive";
 
 
 // Shared Variables
@@ -33,7 +34,8 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  orange: $atp-orange
 );
 
 

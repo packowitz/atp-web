@@ -1,0 +1,61 @@
+.atp-list {
+  color: $atp-dark-text;
+  background-color: $atp-blue-light;
+  border: none;
+  &:hover, &.active-survey {
+    background-color: $atp-mid-blue;
+  }
+}
+
+.atp-list-item {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: $atp-light-grey2;
+  border: 0.5vw solid $atp-light-grey2;
+  .pic {
+    width: 20%;
+    max-width: 128px;
+    height: 20%;
+    max-height: 128px;
+  }
+  .atp-data {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .atp-bar {
+    display: flex;
+    justify-content: space-between;
+    height: 2.4rem;
+    font-weight: 500;
+    border-left: 2px solid $atp-light-grey2;
+    border-right: 2px solid $atp-light-grey2;
+    .expected {
+      color: $atp-green-light;
+      font-weight: 600;
+    }
+    div:not(:last-child) {
+      border-right: 2px solid $atp-light-grey2;
+    }
+    .atp-bar-pic1 {
+      @extend .flex-start;
+      span {
+        margin-left: 5px;
+      }
+      background-color: $atp-light-grey3;
+    }
+    .atp-bar-noOpinion {
+      @extend .flex-center;
+      background-color: $atp-light-grey;
+    }
+    .atp-bar-pic2 {
+      @extend .flex-end;
+      span {
+        margin-right: 5px;
+      }
+      background-color: $atp-dark-grey2;
+    }
+  }
+}
