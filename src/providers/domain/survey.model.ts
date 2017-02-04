@@ -3,6 +3,7 @@ import {Answer} from "./survey-answer.model";
 export class Survey {
   id: number;
   type: string;
+  userId: number;
   status: string;
   title: string;
   groupId: number;

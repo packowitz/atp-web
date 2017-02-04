@@ -2,7 +2,7 @@
   color: $atp-dark-text;
   background-color: $atp-blue-light;
   border: none;
-  &:hover, &.active-survey {
+  &:hover {
     background-color: $atp-mid-blue;
   }
 }

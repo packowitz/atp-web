@@ -29,6 +29,7 @@ import {CreateCouponPage} from "../pages/coupons/create-coupon.component";
 import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
 import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
 import {UsersPage} from "../pages/users/users.component";
+import {SingleSurveyBar} from "../providers/directives/single-survey-bar.component";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,8 @@ import {UsersPage} from "../pages/users/users.component";
     SecuritySurveyPage,
     UserHomePage,
     UsersPage,
+
+    SingleSurveyBar,
 
     CountrySplitPipe
   ],

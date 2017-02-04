@@ -11,4 +11,16 @@ export class SurveyService {
   listSecuritySurveys(): Observable<Survey[]> {
     return this.atpHttp.doGet("/web/app/survey/security/list", "loading security ATPs");
   }
+
+  activateSurvey(survey: Survey): Observable<Survey> {
+    return this.atpHttp.doPut("/web/app/survey/security/activate/" + survey.id, {}, "activating ATP");
+  }
+
+  deactivateSurvey(survey: Survey): Observable<Survey> {
+    return this.atpHttp.doPut("/web/app/survey/security/deactivate/" + survey.id, {}, "deactivating ATP");
+  }
+
+  deleteSurvey(survey: Survey): Observable<any> {
+    return this.atpHttp.doDelete("/web/app/survey/security/" + survey.id, "deleting ATP");
+  }
 }

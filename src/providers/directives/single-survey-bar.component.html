@@ -1,0 +1,65 @@
+<ion-item-sliding #slidingItem>
+  <ion-item class="atp-list fake-link">
+    <div class="atp-list-item">
+      <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="pic">
+      <div class="atp-data flex-grow">
+        <div class="flex-space-between px1 no-small-device">
+          <small *ngIf="survey.type == 'SECURITY'">User #{{survey.userId}}</small>
+          <small *ngIf="survey.type != 'SECURITY'">started {{util.getTimeDiff(survey.startedDate)}} ago</small>
+          <small>{{survey.startedDate | date:'dd/MM/yyyy HH:mm'}}</small>
+        </div>
+        <span class="flex-grow flex-space-around larger-text">
+          {{survey.title ? survey.title : '&lt;no title&gt;'}}
+        </span>
+        <div class="flex-grow flex-space-around larger-text">
+          <span>
+            <i class="fa fa-circle" [class.color-active]="survey.status == 'ACTIVE'" [class.color-inactive]="survey.status == 'FINISHED'"></i> {{survey.answered}} votes
+            <span class="no-small-device" *ngIf="survey.type == 'SECURITY' && survey.answered > 0">
+              <span *ngIf="survey.expectedAnswer == 1"> - {{100 * survey.pic1Count / survey.answered | number : '1.0-2'}}% correct</span>
+              <span *ngIf="survey.expectedAnswer == 2"> - {{100 * survey.pic2Count / survey.answered | number : '1.0-2'}}% correct</span>
+              <span *ngIf="survey.expectedAnswer == 3"> - {{100 * survey.noOpinionCount / survey.answered | number : '1.0-2'}}% correct</span>
+            </span>
+          </span>
+        </div>
+        <div class="atp-bar larger-text">
+          <div class="atp-bar-pic1" *ngIf="survey.pic1Count > 0" [style.width]="100 * survey.pic1Count / survey.answered + '%'">
+            <span *ngIf="(100 * survey.pic1Count / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 1">{{survey.pic1Count}}</span>
+          </div>
+          <div class="atp-bar-noOpinion" *ngIf="survey.noOpinionCount > 0" [style.width]="100 * survey.noOpinionCount / survey.answered + '%'">
+            <span *ngIf="(100 * survey.noOpinionCount / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 3">{{survey.noOpinionCount}}</span>
+          </div>
+          <div class="atp-bar-pic2" *ngIf="survey.pic2Count > 0" [style.width]="100 * survey.pic2Count / survey.answered + '%'">
+            <span *ngIf="(100 * survey.pic2Count / survey.answered) >= 10" [class.expected]="survey.expectedAnswer == 2">{{survey.pic2Count}}</span>
+          </div>
+        </div>
+      </div>
+      <img [src]="'data:image/jpeg;base64,' + survey.pic2" class="pic">
+    </div>
+    <div class="flex-space-between color-light" *ngIf="showAttributes">
+      <span class="no-small-device" *ngIf="survey.male && !survey.female">male only</span>
+      <span class="no-small-device" *ngIf="!survey.male && survey.female">female only</span>
+      <span class="no-small-device" *ngIf="survey.male && survey.female">male and female</span>
+      <span class="no-large-device"><i *ngIf="survey.male" class="fa fa-male"></i><i *ngIf="survey.female" class="fa fa-female"></i></span>
+      <span>{{survey.minAge}}-{{survey.maxAge}} yrs</span>
+      <span><span *ngIf="survey.countries == 'ALL'">all countries</span><span *ngIf="survey.countries != 'ALL'">{{survey.countries}}</span></span>
+    </div>
+  </ion-item>
+  <ion-item-options>
+    <button ion-button color="orange" *ngIf="survey.type == 'SECURITY' && survey.status == 'ACTIVE'" (click)="deactivate(survey)">
+      <ion-icon name="pause"></ion-icon>
+      Deactivate
+    </button>
+    <button ion-button color="secondary" *ngIf="survey.type == 'SECURITY' && survey.status == 'FINISHED'" (click)="activate(survey)">
+      <ion-icon name="play"></ion-icon>
+      Activate
+    </button>
+    <button ion-button color="light" (click)="copy(survey)">
+      <ion-icon name="copy"></ion-icon>
+      Copy
+    </button>
+    <button ion-button color="danger" (click)="delete(survey)">
+      <ion-icon name="trash"></ion-icon>
+      Delete
+    </button>
+  </ion-item-options>
+</ion-item-sliding>
