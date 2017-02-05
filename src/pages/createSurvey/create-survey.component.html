@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="flex-space-between">
+        <div>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <span *ngIf="!security">Create new ATP</span>
+        <span *ngIf="security">New security ATP</span>
+        <img src="assets/img/icon.png" class="title-logo">
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="start-survey">
+  <ion-card>
+    <ion-toolbar color="white" no-lines>
+      <ion-item class="list-header">
+        Who is your target audience?
+      </ion-item>
+    </ion-toolbar>
+    <ion-toolbar color="white">
+      <ion-item no-lines>
+        Gender:
+      </ion-item>
+      <ion-buttons right>
+        <button ion-button clear icon-right (click)="changeGender($event)"
+                [color]="(survey.male && !survey.female)
+          ? 'atp-blue'
+          : (!survey.male && survey.female)
+          ? 'pink'
+          : 'favorite'">
+          {{
+          (survey.male && !survey.female)
+          ? 'Male only'
+          : (!survey.male && survey.female)
+          ? 'Female only'
+          : 'Any gender'
+          }}
+          <ion-icon [name]="
+          (survey.male && !survey.female)
+          ? 'male'
+          : (!survey.male && survey.female)
+          ? 'female'
+          : 'transgender'">
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar color="white">
+      <ion-item>
+        Age:
+        <span item-right class="age-range">
+          {{ageRange.lower}} - {{ageRange.upper}} years
+        </span>
+      </ion-item>
+    </ion-toolbar>
+    <ion-item>
+      <ion-range dualKnobs="true" min="5" max="99" [(ngModel)]="ageRange" class="no-padding-top"></ion-range>
+    </ion-item>
+
+    <ion-toolbar color="white">
+      <ion-item no-lines>
+        Countries:
+      </ion-item>
+
+      <ion-buttons right>
+        <button color="atp-blue" ion-button icon-right clear *ngIf="countries.length < 20" (click)="addCountry($event)">
+          Add
+          <ion-icon name="add">
+          </ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-item>
+      <div class="color-placeholder center">
+        {{countries.length > 0 ? '(click on flag to remove country)' : countries.length == 0 ? 'no restriction' : ''}}
+      </div>
+      <div class="countries">
+        <span class="country" *ngFor="let country of countries" (click)="removeCountry(country)">
+          <img src="assets/img/flags/{{country}}.png" class="start-survey-flag">
+        </span>
+      </div>
+    </ion-item>
+    <ion-item *ngIf="!security">
+      <ion-label>Create ATP for each country</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="eachCountrySeparate"></ion-checkbox>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-toolbar color="white">
+      <ion-item class="list-header">
+        Add <span *ngIf="!security">2-5</span><span *ngIf="security">2</span> pictures:
+      </ion-item>
+
+      <ion-buttons right>
+        <button ion-button icon-right clear color="atp-blue" *ngIf="pictures.length < (security ? 2 : 5)" (click)="openFileDialog()">
+          Add
+          <ion-icon name="image"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <div class="picture-container">
+      <div *ngFor="let pic of pictures; let idx = index" class="pic">
+        <img [src]="'data:image/jpeg;base64,' + pic"/>
+        <div class="remove" (click)="deletePicture(idx)">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+    </div>
+    <ion-item>
+      <ion-label stacked primary class="stacked-title">Short description (optional):</ion-label>
+      <ion-input type="text" maxLength="25" [(ngModel)]="survey.title"
+                 placeholder="Example: {{exampleText}}"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="security">
+      <div class="stacked-title">Expected answer:</div>
+      <div class="buttongroup mt1">
+        <button ion-button outline color="dark" [class.button-md-white]="survey.expectedAnswer != 1" [class.button-md-atp-blue]="survey.expectedAnswer == 1" (click)="survey.expectedAnswer = 1">Picture 1</button>
+        <button ion-button outline color="dark" [class.button-md-white]="survey.expectedAnswer != 2" [class.button-md-atp-blue]="survey.expectedAnswer == 2" (click)="survey.expectedAnswer = 2">Picture 2</button>
+        <button ion-button outline color="dark" [class.button-md-white]="survey.expectedAnswer != 3" [class.button-md-atp-blue]="survey.expectedAnswer == 3" (click)="survey.expectedAnswer = 3">Skip answer</button>
+      </div>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="!security">
+    <ion-toolbar color="white">
+      <ion-item class="list-header">
+        ATP-Range:
+      </ion-item>
+    </ion-toolbar>
+    <ion-item *ngIf="pictures.length > 2">
+      {{pictures.length}} pictures lead to {{numberOfSurveys}} ATPs. <i class="fa fa-question-circle" (click)="showMultiPictureHint()"></i>
+    </ion-item>
+
+    <ion-toolbar color="white">
+      <ion-item>
+        {{surveyType.name}} ({{surveyType.answers}} people)
+      </ion-item>
+      <ion-buttons right>
+        <button ion-button clear color="atp-blue" (click)="changeSurveyType($event)" item-right>
+          Toggle
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-item *ngIf="model.webuser.credits < surveyType.costs">
+      <i item-right class="color-red no-margin-top">You don't have enough pax for this ATP-Range!</i>
+    </ion-item>
+  </ion-card>
+
+  <div class="submit-row">
+    <button ion-button full [disabled]="!surveyComplete()" (click)="startSurvey()" class="start-survey-button">
+      Start&nbsp;
+      <span *ngIf="!security">ATP ({{numberOfSurveys * surveyType.costs}}&nbsp;<i class="fa fa-diamond"></i>)</span>
+      <span *ngIf="security">security ATP</span>
+    </button>
+  </div>
+
+  <input type="file" accept="image/*" id="create-survey-file-selection" value="Choose a file" (change)="fileChangeEvent($event)" class="hidden">
+  <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
+    <div class="croppie-modal" (click)="$event.stopPropagation()">
+      <div id="create-survey-croppie"></div>
+      <div class="modal-buttons">
+        <button ion-button small outline (click)="destroyCroppie()">Cancel</button>
+        <button ion-button small outline color="dark" icon-only (click)="rotateLeft()">
+          <ion-icon name="undo"></ion-icon>
+        </button>
+        <button ion-button small outline color="dark" icon-only (click)="rotateRight()">
+          <ion-icon name="redo"></ion-icon>
+        </button>
+        <button ion-button small (click)="saveCroppedPicture()">Take it</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

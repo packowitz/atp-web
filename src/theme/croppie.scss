@@ -1,0 +1,28 @@
+.modal-background {
+  @extend .flex-center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.4);
+
+  .modal-content {
+    min-width: 45vw;
+  }
+}
+
+.croppie-modal {
+  background-color: $atp-light;
+  border: 2px solid black;
+  .croppie-container {
+    padding: 2vw;
+  }
+
+  .modal-buttons {
+    @extend .flex-space-around;
+    margin-top: 2vw;
+    margin-bottom: 4vw;
+  }
+}

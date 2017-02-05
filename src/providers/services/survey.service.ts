@@ -2,6 +2,7 @@ import {AtpHttp} from "./atp-http.service";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {Survey} from "../domain/survey.model";
+import {SurveyType} from "../domain/survey-type.model";
 
 @Injectable()
 export class SurveyService {
@@ -22,5 +23,9 @@ export class SurveyService {
 
   deleteSurvey(survey: Survey): Observable<any> {
     return this.atpHttp.doDelete("/web/app/survey/security/" + survey.id, "deleting ATP");
+  }
+
+  createSurvey(survey: Survey, type: SurveyType, pictures: string[], eachCountrySeparate: boolean): Observable<Survey[]> {
+    return this.atpHttp.doPost("/web/app/survey", {survey: survey, type: type.key, pictures: pictures, eachCountrySeparate: eachCountrySeparate}, "creating ATP");
   }
 }

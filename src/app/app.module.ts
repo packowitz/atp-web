@@ -30,6 +30,8 @@ import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.comp
 import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
 import {UsersPage} from "../pages/users/users.component";
 import {SingleSurveyBar} from "../providers/directives/single-survey-bar.component";
+import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
+import {CountrySelectionPopover} from "../pages/countrySelection/countrySelection.component";
 
 @NgModule({
   declarations: [
@@ -37,9 +39,11 @@ import {SingleSurveyBar} from "../providers/directives/single-survey-bar.compone
 
     AdminHomePage,
     AnnouncementsPage,
+    CountrySelectionPopover,
     CouponsPage,
     CreateAnnouncementPage,
     CreateCouponPage,
+    CreateSurveyPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
@@ -62,9 +66,11 @@ import {SingleSurveyBar} from "../providers/directives/single-survey-bar.compone
     AdminHomePage,
     AnnouncementsPage,
     AtpWebApp,
+    CountrySelectionPopover,
     CouponsPage,
     CreateAnnouncementPage,
     CreateCouponPage,
+    CreateSurveyPage,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,

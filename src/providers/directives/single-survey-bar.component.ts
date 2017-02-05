@@ -3,6 +3,7 @@ import {NavController, ItemSliding} from "ionic-angular";
 import {Util} from "../services/util.service";
 import {Survey} from "../domain/survey.model";
 import {SurveyService} from "../services/survey.service";
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'single-survey-bar',
@@ -16,8 +17,11 @@ export class SingleSurveyBar {
   @Input()
   showAttributes: boolean;
 
+  deleted: boolean = false;
+
   constructor(public nav: NavController,
               public surveyService: SurveyService,
+              public notificationService: NotificationService,
               public util: Util) {
   }
 
@@ -54,17 +58,14 @@ export class SingleSurveyBar {
   }
 
   delete() {
-    // if(window.confirm("Are you sure to delete this security ATP?")) {
-    //   this.surveyService.deleteSurvey(survey).subscribe(
-    //     () => {
-    //       let idx = this.surveys.indexOf(survey);
-    //       if(idx >= 0) {
-    //         this.surveys.splice(idx, 1);
-    //       }
-    //       this.notificationService.showSuccess("Security ATP deleted")
-    //     }
-    //   );
-    // }
+    if(window.confirm("Are you sure to delete this security ATP?")) {
+      this.surveyService.deleteSurvey(this.survey).subscribe(
+        () => {
+          this.deleted = true;
+          this.notificationService.showDefaultToast("ATP deleted")
+        }
+      );
+    }
   }
 
   copy(survey: Survey) {}

@@ -9,6 +9,7 @@ $font-path: "../assets/fonts";
 @import "ionic-fixes";
 @import "common";
 @import "responsive";
+@import "croppie";
 
 
 // Shared Variables
@@ -35,7 +36,13 @@ $colors: (
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  orange: $atp-orange
+  favorite:   #69BB7B,
+  orange:     $atp-orange,
+  white:      #ffffff,
+  pink:       #ff87eb,
+  atp-red:    $atp-red,
+  atp-blue:   #3e85c7,
+  atp-placeholder-grey: $atp-placeholder-grey
 );
 
 

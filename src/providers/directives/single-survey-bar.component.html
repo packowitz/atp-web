@@ -1,4 +1,4 @@
-<ion-item-sliding #slidingItem>
+<ion-item-sliding *ngIf="!deleted" #slidingItem>
   <ion-item class="atp-list fake-link">
     <div class="atp-list-item">
       <img [src]="'data:image/jpeg;base64,' + survey.pic1" class="pic">

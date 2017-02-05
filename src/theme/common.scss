@@ -27,3 +27,33 @@
 .allow-wrapping {
   white-space: normal !important;
 }
+
+.hidden {
+  display: none;
+}
+
+.buttongroup {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  button:first-child {
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    margin-left: 0;
+  }
+
+  button:last-child {
+    border-bottom-right-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    margin-right: 0;
+  }
+
+  button {
+    position: relative;
+    float: left;
+    box-shadow: none;
+    margin: 0 -1px;
+    border-radius: 0px;
+  }
+}
