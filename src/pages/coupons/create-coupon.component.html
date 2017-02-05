@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create coupon</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>Code (8-25 characters)</ion-label>
+    <ion-input type="text" minlength="8" maxlength="25" [(ngModel)]="coupon.code"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Reward</ion-label>
+    <ion-input type="number" min="1" [(ngModel)]="coupon.reward"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Start Day</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="coupon.startDate"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>End Day</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="coupon.endDate"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>check if only for single usage</ion-label>
+    <ion-checkbox color="dark" [(ngModel)]="coupon.singleUse"></ion-checkbox>
+  </ion-item>
+  <div class="flex-center mt2">
+    <button ion-button (click)="createCoupon()" [disabled]="!coupon.code || coupon.code.length < 8 || coupon.code.length > 25 || !coupon.reward || coupon.reward < 1">Create</button>
+  </div>
+</ion-content>

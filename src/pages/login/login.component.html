@@ -1,0 +1,31 @@
+<div class="login-page center flex-vert-center">
+  <div class="mt4">
+    <img width="68" src="assets/img/icon.png">
+  </div>
+  <div class="mt3">
+    <div class="h1 color-grey">Welcome to Ask the People!</div>
+    <div class="h2 color-grey mt2">Sign in with your email address</div>
+  </div>
+  <ion-item class="mt2">
+    <ion-label floating>email address</ion-label>
+    <ion-input type="email" [(ngModel)]="email" (keyup.enter)="doLogin()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>password</ion-label>
+    <ion-input type="password" [(ngModel)]="password" (keyup.enter)="doLogin()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <button ion-button full [disabled]="!email || !password" (click)="doLogin()">LOG IN</button>
+  </ion-item>
+  <ion-item no-lines>
+    <div class="flex-space-between">
+      <span><a href="">Forgot password?</a></span>
+      <span><strong>New to ATP?</strong></span>
+      <span><a href="">Register</a></span>
+    </div>
+  </ion-item>
+  <div class="mt3 pt3 color-grey">
+    <div class="flex-center"><img width="32" src="assets/img/icon.png">&nbsp;&nbsp;Ask the People</div>
+    <div class="mt2">&copy; 2017 Pacworx</div>
+  </div>
+</div>

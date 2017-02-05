@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="flex-space-between">
+        <div>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <span>Security ATPs</span>
+        <img src="assets/img/icon.png" class="title-logo">
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab color="atp-red" (click)="createSecuritySurvey()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-list no-lines>
+    <div *ngFor="let survey of surveys">
+      <single-survey-bar [survey]="survey" [showAttributes]="true"></single-survey-bar>
+    </div>
+  </ion-list>
+</ion-content>

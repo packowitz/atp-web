@@ -1,26 +1,60 @@
-<div class="container">
-  <nav class="navbar navbar-light bg-faded flex-space-between">
-    <a [routerLink]="['/']" class="navbar-brand flex-left"><img width="32" src="assets/img/icon.png">&nbsp;&nbsp;<span class="atp-logo-text">ATP <small>beta</small></span></a>
-    <ul class="nav navbar-nav" *ngIf="model && model.webuser">
-      <li class="nav-item" routerLinkActive="active" *ngIf="model.userRights.coupons || model.userRights.userAdmin">
-        <a [routerLink]="['user']" class="nav-link">User</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a [routerLink]="['atps/list']" class="nav-link">ATPs</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" *ngIf="model.userRights.callcenter || model.userRights.marketing">
-        <a [routerLink]="['cc']" class="nav-link">CommCenter</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a [routerLink]="['profile']" class="nav-link">Profile</a>
-      </li>
-      <li class="nav-item">
-        <span class="nav-link fake-link" (click)="logout()">LOGOUT</span>
-      </li>
-    </ul>
-  </nav>
-  <div class="m-a-1">
-    <router-outlet></router-outlet>
-  </div>
-</div>
-<notification></notification>
+<ion-menu side="left" persistent="true" [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="outer-content" *ngIf="model.webuser">
+    <ion-list>
+      <ion-item-group>
+        <ion-item><div class="color-grey">{{model.webuser.username ? model.webuser.username : 'Me'}}</div></ion-item>
+        <button ion-item menuClose (click)="showProfilePage()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>Personal data</button>
+      </ion-item-group>
+    </ion-list>
+
+    <button ion-button menuClose (click)="test()">TEST</button>
+
+    <ion-list>
+      <ion-item-group>
+        <ion-item><div class="color-grey">ATPs</div></ion-item>
+        <button ion-item menuClose (click)="showMyAtps()"><ion-icon item-left name="list"></ion-icon>My ATPs</button>
+        <button *ngIf="model.userRights.security" ion-item menuClose (click)="showSecurityAtps()"><ion-icon item-left name="lock"></ion-icon>Security ATPs</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list *ngIf="model.userRights.coupons || model.userRights.userAdmin">
+      <ion-item-group>
+        <ion-item><div class="color-grey">User Management</div></ion-item>
+        <button *ngIf="model.userRights.coupons" ion-item menuClose (click)="showCoupons()"><ion-icon item-left name="card"></ion-icon>Coupons</button>
+        <button *ngIf="model.userRights.userAdmin" ion-item menuClose (click)="showUsers()"><ion-icon item-left name="people"></ion-icon>Users</button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list *ngIf="model.userRights.callcenter">
+      <ion-item-group>
+        <ion-item><div class="color-grey">Feedback</div></ion-item>
+        <button ion-item menuClose (click)="showImprovements()"><ion-icon item-left name="bulb"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openImprovements > 0">{{model.openImprovements}}</ion-badge>Improvements
+        </button>
+        <button ion-item menuClose (click)="showBugs()"><ion-icon item-left name="bug"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openBugs > 0">{{model.openBugs}}</ion-badge>Bugs
+        </button>
+        <button ion-item menuClose (click)="showMessageSuggestions()"><ion-icon item-left name="mail"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openMessages > 0">{{model.openMessages}}</ion-badge>Message Suggestions
+        </button>
+        <button ion-item menuClose (click)="showOtherFeedback()"><ion-icon item-left name="paper"></ion-icon>
+          <ion-badge color="danger" *ngIf="model.openOthers > 0">{{model.openOthers}}</ion-badge>Other feedback
+        </button>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-list *ngIf="model.userRights.marketing">
+      <ion-item-group>
+        <button ion-item menuClose (click)="showAnnouncements()"><ion-icon item-left name="megaphone"></ion-icon>Announcements</button>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content></ion-nav>

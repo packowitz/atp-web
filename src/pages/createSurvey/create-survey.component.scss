@@ -1,0 +1,94 @@
+.start-survey {
+  background-color: $atp-light-grey2;
+
+  ion-card {
+    display: block;
+    position: relative;
+    margin: 5px 5px 5px 0;
+    width: 100%;
+  }
+
+  .list-header {
+    font-size: 2rem;
+    font-weight: 600;
+    color: color($colors, atp-placeholder-grey);
+  }
+
+  .stacked-title {
+    font-size: 1.6rem !important;
+    color: black !important;
+  }
+
+  .picture-title {
+    margin: 4vw 4vw 0 4vw;
+    font-size: 1.6rem;
+  }
+
+  .picture-container {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background-color: white;
+  }
+
+  .pic {
+    position: relative;
+    margin: 4px;
+    border: 2px $atp-dark-grey2 solid;
+    width: 40%;
+    height: auto;
+    max-width: 200px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5vw;
+      height: 5vw;
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .start-survey-flag {
+    border: 1px black solid;
+    height: 2rem;
+    width: auto;
+  }
+
+  .countries {
+    margin-top: 6px;
+  }
+
+  .country {
+    margin-right: 1vw;
+    float: left;
+  }
+
+}
+
+.submit-row {
+  padding: 16px;
+  border-top: 1px $atp-light-grey4 solid;
+
+  .start-survey-button {
+    background-color: $atp-blue-dark;
+    &.activated {
+      background-color: $atp-blue;
+    }
+    .diamond-icon {
+      height: 1.6rem;
+      margin-left: 4px;
+    }
+  }
+}

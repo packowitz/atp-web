@@ -1,18 +1,70 @@
-import { Component } from '@angular/core';
-import {LocalStorage} from "./shared/localStorage.component";
-import {Model} from "./shared/model.component";
-import {Router} from "@angular/router";
+import {Component, ViewChild} from '@angular/core';
+import {Platform, NavController} from 'ionic-angular';
+import {LoadingPage} from "../pages/loading/loading.component";
+import {Model} from "../providers/services/model.service";
+import {ProfilePage} from "../pages/profile/profile.component";
+import {FeedbackPage} from "../pages/feedback/feedback.component";
+import {AnnouncementsPage} from "../pages/announcements/announcements.component";
+import {CouponsPage} from "../pages/coupons/coupons.component";
+import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
+import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
+import {UsersPage} from "../pages/users/users.component";
+import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
+
 
 @Component({
-  selector: 'atp-app',
-  templateUrl: './app.component.html'
+  templateUrl: 'app.component.html'
 })
-export class AppComponent {
-  constructor(private router: Router, private model: Model, private localStorage: LocalStorage) {}
+export class AtpWebApp {
+  @ViewChild('content') nav: NavController;
+  rootPage = LoadingPage;
 
-  logout() {
-    this.model.webuser = null;
-    this.localStorage.setToken(null);
-    this.router.navigateByUrl('/login');
+  constructor(platform: Platform, public model: Model) {
+    platform.ready().then(() => {
+    });
+  }
+
+  showProfilePage() {
+    this.nav.push(ProfilePage);
+  }
+
+  showImprovements() {
+    this.nav.push(FeedbackPage, {type: 'IMPROVEMENT', status: 'OPEN'});
+  }
+
+  showBugs() {
+    this.nav.push(FeedbackPage, {type: 'BUG_REPORT', status: 'OPEN'});
+  }
+
+  showMessageSuggestions() {
+    this.nav.push(FeedbackPage, {type: 'MESSAGE_SUGGESTION', status: 'OPEN'});
+  }
+
+  showOtherFeedback() {
+    this.nav.push(FeedbackPage, {type: 'OTHER', status: 'OPEN'});
+  }
+
+  showAnnouncements() {
+    this.nav.push(AnnouncementsPage);
+  }
+
+  showCoupons() {
+    this.nav.push(CouponsPage);
+  }
+
+  showSecurityAtps() {
+    this.nav.push(SecuritySurveyPage);
+  }
+
+  showMyAtps() {
+    this.nav.push(MySurveysPage);
+  }
+
+  showUsers() {
+    this.nav.push(UsersPage);
+  }
+
+  test() {
+    this.nav.push(CreateSurveyPage, {security: true});
   }
 }

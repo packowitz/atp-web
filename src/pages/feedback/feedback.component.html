@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="flex-space-between">
+        <div>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <span>{{name}}</span>
+        <img src="assets/img/icon.png" class="title-logo">
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-segment [(ngModel)]="status">
+    <ion-segment-button value="OPEN" (ionSelect)="showOpen()">
+      open
+    </ion-segment-button>
+    <ion-segment-button value="ANSWERED" (ionSelect)="showAnswered()">
+      answered
+    </ion-segment-button>
+    <ion-segment-button value="CLOSED" (ionSelect)="showClosed()">
+      closed
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list *ngIf="feedbackList">
+    <ion-item *ngFor="let feedback of feedbackList" (click)="showFeedbackDetail(feedback)" class="fake-link action-item">
+      <div>
+        <small class="flex-space-between mb2">
+          <span>{{util.getTimeDiff(feedback.lastActionDate)}} ago</span>
+          <span *ngIf="feedback.answers > 0">{{feedback.answers}} answers</span>
+          <span *ngIf="feedback.answers == 0">unanswered</span>
+        </small>
+        <h2>#{{feedback.id}} - {{feedback.title}}</h2>
+        <p class="pt1">{{feedback.message}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

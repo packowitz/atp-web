@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="flex-space-between">
+        <div>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <span>Coupons</span>
+        <img src="assets/img/icon.png" class="title-logo">
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="flex-center">
+    <button ion-button (click)="createCoupon()">Create new Coupon</button>
+  </div>
+  <ion-list *ngIf="coupons">
+    <ion-item *ngFor="let coupon of coupons" class="fake-link action-item" (click)="showDetails(coupon)">
+      <small class="flex-space-between mb1">
+        <span>Created by User #{{coupon.adminId}}</span>
+        <span>{{coupon.creationDate | date: 'dd/MM/yyyy HH:mm'}}</span>
+      </small>
+      <small class="mb1">
+        Valid from {{coupon.startDate | date: 'dd/MM/yyyy'}} to {{coupon.endDate | date: 'dd/MM/yyyy'}}
+      </small>
+      <div class="mb1">
+        <i class="fa fa-circle" [class.color-active]="coupon.active" [class.color-inactive]="!coupon.active"></i>&nbsp;{{coupon.code}}
+      </div>
+      <div class="flex-space-between mb1">
+        <span>{{coupon.reward | number}} pax</span>
+        <span *ngIf="coupon.singleUse">{{coupon.redeemed}}/1</span>
+        <span *ngIf="!coupon.singleUse">{{coupon.redeemed}}x</span>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

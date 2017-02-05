@@ -1,0 +1,10 @@
+.scroll-content {
+  overflow-y: auto !important;
+}
+
+ion-item-sliding.active-slide ion-item-options {
+  align-items: center;
+  button {
+    max-height: 75px;
+  }
+}

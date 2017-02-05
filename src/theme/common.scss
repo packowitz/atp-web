@@ -1,0 +1,59 @@
+.fake-link {
+  cursor: pointer;
+}
+
+.flag-list {
+  img {
+    height: 1.2em;
+    width: auto;
+    border: 1px black solid;
+  }
+}
+
+.action-item {
+  &:hover {
+    background-color: $atp-light-grey4;
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.allow-wrapping {
+  white-space: normal !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.buttongroup {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  button:first-child {
+    border-bottom-left-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    margin-left: 0;
+  }
+
+  button:last-child {
+    border-bottom-right-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    margin-right: 0;
+  }
+
+  button {
+    position: relative;
+    float: left;
+    box-shadow: none;
+    margin: 0 -1px;
+    border-radius: 0px;
+  }
+}
