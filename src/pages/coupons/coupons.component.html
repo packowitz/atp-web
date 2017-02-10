@@ -15,9 +15,9 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="flex-center">
-    <button ion-button (click)="createCoupon()">Create new Coupon</button>
-  </div>
+  <ion-fab right bottom>
+    <button ion-fab color="atp-red" (click)="createCoupon()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-list *ngIf="coupons">
     <ion-item *ngFor="let coupon of coupons" class="fake-link action-item" (click)="showDetails(coupon)">
       <small class="flex-space-between mb1">

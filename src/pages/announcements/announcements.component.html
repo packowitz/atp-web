@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab color="atp-red" (click)="newAnnoucement()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <div *ngIf="announcements">
     <ion-card *ngFor="let announcement of announcements">
       <ion-card-header>
@@ -40,9 +43,6 @@
         </div>
       </ion-card-content>
     </ion-card>
-    <div class="flex-center">
-      <button ion-button (click)="newAnnoucement()">Write an announcement</button>
-    </div>
   </div>
 </ion-content>
 
