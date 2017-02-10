@@ -63,8 +63,4 @@ export class AtpWebApp {
   showUsers() {
     this.nav.push(UsersPage);
   }
-
-  test() {
-    this.nav.push(CreateSurveyPage, {security: true});
-  }
 }
