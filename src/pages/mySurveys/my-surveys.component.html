@@ -15,5 +15,40 @@
 </ion-header>
 
 <ion-content padding>
-  This is the My ATPs page
+  <ion-fab right bottom>
+    <button ion-fab color="atp-red" (click)="createSurvey()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <ion-list no-lines>
+    <div *ngFor="let survey of localStorage.surveys">
+      <div class="margin-top-middle" *ngIf="!survey.multiPicture">
+        <single-survey-bar [survey]="survey.surveys[0]" [showAttributes]="true">
+        </single-survey-bar>
+      </div>
+
+      <ion-item (click)="openMultiPictureSurveyDetails()" class="atp-list fake-link" *ngIf="survey.multiPicture">
+        <div class="multipicture-list-item">
+          <div class="flex-center py1">
+            <span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes in {{util.getTimeDiff(survey.startedDate)}}
+          </div>
+          <div class="multi-picture-container">
+            <span *ngFor="let picture of survey.pictures" class="multi-pictures">
+              <img [src]="'data:image/jpeg;base64,' + picture.picture" class="survey-list-img">
+              <div class="flex-center">{{picture.votesFor}}</div>
+            </span>
+          </div>
+        </div>
+
+        <div class="flex-space-between color-light">
+          <span class="no-small-device" *ngIf="survey.male && !survey.female">male only</span>
+          <span class="no-small-device" *ngIf="!survey.male && survey.female">female only</span>
+          <span class="no-small-device" *ngIf="survey.male && survey.female">male and female</span>
+          <span class="no-large-device"><i *ngIf="survey.male" class="fa fa-male"></i><i *ngIf="survey.female" class="fa fa-female"></i></span>
+          <span>{{survey.minAge}}-{{survey.maxAge}} yrs</span>
+          <span><span *ngIf="survey.countries == 'ALL'">all countries</span><span *ngIf="survey.countries != 'ALL'">{{survey.countries}}</span></span>
+        </div>
+
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>

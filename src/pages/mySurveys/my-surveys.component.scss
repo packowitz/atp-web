@@ -1,0 +1,22 @@
+.multipicture-list-item {
+  background-color: $atp-light-grey2;
+  border: 0.5vw solid $atp-light-grey2;
+}
+
+.multi-picture-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+
+  .multi-pictures:not(:first-child) {
+    margin-left: 2vw;
+  }
+
+  .multi-pictures {
+    min-width: 10vh;
+    max-width: 10vh;
+    width: 10vh;
+  }
+}
