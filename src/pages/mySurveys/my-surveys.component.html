@@ -28,7 +28,7 @@
 
       <ion-item (click)="openMultiPictureSurveyDetails()" class="atp-list fake-link" *ngIf="survey.multiPicture">
         <div class="multipicture-list-item">
-          <div class="flex-center py1">
+          <div class="flex-center py1 larger-text">
             <span class="status-circle {{survey.status}}"></span> {{survey.answered}} votes in {{util.getTimeDiff(survey.startedDate)}}
           </div>
           <div class="multi-picture-container">
