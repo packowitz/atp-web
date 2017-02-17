@@ -6,6 +6,7 @@ import {SurveyType} from "../../providers/domain/survey-type.model";
 import {CountrySelectionPopover} from "../countrySelection/countrySelection.component";
 import {NotificationService} from "../../providers/services/notification.service";
 import {SurveyService} from "../../providers/services/survey.service";
+import {CountryService} from "../../providers/services/country.service";
 
 declare var Croppie: any;
 
@@ -19,6 +20,7 @@ export class CreateSurveyPage {
   surveyType: SurveyType;
   countries: string[];
   eachCountrySeparate: boolean;
+  numberOfAllCountries: number;
   ageRange = {lower: 1, upper: 99};
   exampleText: string;
   pictures: string[];
@@ -31,8 +33,10 @@ export class CreateSurveyPage {
               public nav: NavController,
               public notificationService: NotificationService,
               public popoverController: PopoverController,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public countryService: CountryService) {
     this.security = navParams.get('security') === true;
+    this.countryService.getCountries().subscribe(countries => this.numberOfAllCountries = countries.length);
     this.createEmptySurvey();
   }
 
@@ -132,10 +136,14 @@ export class CreateSurveyPage {
   }
 
   recalculateNumberOfSurveys() {
+    let multiplier = 1;
+    if(this.eachCountrySeparate) {
+      multiplier = this.countries.length == 0 ? this.numberOfAllCountries : this.countries.length;
+    }
     if (this.pictures.length <= 2) {
-      this.numberOfSurveys = 1;
+      this.numberOfSurveys = multiplier;
     } else {
-      this.numberOfSurveys = (this.pictures.length * (this.pictures.length - 1)) / 2;
+      this.numberOfSurveys = multiplier * ((this.pictures.length * (this.pictures.length - 1)) / 2);
     }
   }
 
@@ -157,6 +165,7 @@ export class CreateSurveyPage {
       if (this.countries.indexOf(country.alpha3) == -1) {
         this.countries.push(country.alpha3);
         this.countries.sort();
+        this.recalculateNumberOfSurveys();
       }
       countrySelection.dismiss();
     }});
@@ -167,6 +176,7 @@ export class CreateSurveyPage {
     let idx = this.countries.indexOf(country);
     if(idx != -1) {
       this.countries.splice(idx,1);
+      this.recalculateNumberOfSurveys();
     }
   }
 
