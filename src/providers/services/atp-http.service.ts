@@ -120,7 +120,13 @@ export class AtpHttp {
         let closeBtn = {text: 'OK'};
         let homeBtn = {text: 'home', handler: () => this.nav.setRoot(LoadingPage)};
 
-        let body = JSON.parse(err._body);
+        let body;
+        if(err.status == 0) {
+          body = {title: 'Network error', message: 'Please check that you are connected to the internet', showRetryBtn: true}
+        } else {
+          body = JSON.parse(err._body);
+        }
+
         if(body) {
           title = body.title;
           message = body.message;
