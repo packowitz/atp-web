@@ -24,6 +24,7 @@ export class Survey {
   abuseCount: number;
   startedDate: string;
   expectedAnswer: number;
+  daysBetween: number;
 
   answers: Answer[];
 }

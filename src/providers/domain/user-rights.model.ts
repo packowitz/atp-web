@@ -4,4 +4,5 @@ export class UserRights {
   userAdmin: boolean;
   security: boolean;
   coupons: boolean;
+  research: boolean;
 }

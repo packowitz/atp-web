@@ -8,3 +8,7 @@ ion-item-sliding.active-slide ion-item-options {
     max-height: 75px;
   }
 }
+
+.no-max-width {
+  max-width: inherit !important;
+}

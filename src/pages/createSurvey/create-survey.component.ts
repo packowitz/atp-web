@@ -7,6 +7,7 @@ import {CountrySelectionPopover} from "../countrySelection/countrySelection.comp
 import {NotificationService} from "../../providers/services/notification.service";
 import {SurveyService} from "../../providers/services/survey.service";
 import {CountryService} from "../../providers/services/country.service";
+import {LocalStorage} from "../../providers/services/local-storage.service";
 
 declare var Croppie: any;
 
@@ -26,6 +27,7 @@ export class CreateSurveyPage {
   pictures: string[];
   croppie: any;
   numberOfSurveys: number;
+  permanentAtp: boolean;
 
   constructor(public model: Model,
               public surveyService: SurveyService,
@@ -34,7 +36,8 @@ export class CreateSurveyPage {
               public notificationService: NotificationService,
               public popoverController: PopoverController,
               public alertController: AlertController,
-              public countryService: CountryService) {
+              public countryService: CountryService,
+              public localStorage: LocalStorage) {
     this.security = navParams.get('security') === true;
     this.countryService.getCountries().subscribe(countries => this.numberOfAllCountries = countries.length);
     this.createEmptySurvey();
@@ -46,12 +49,14 @@ export class CreateSurveyPage {
     this.pictures = [];
     this.numberOfSurveys = 1;
     this.survey = new Survey();
+    this.survey.daysBetween = 7;
     this.countries = [];
     this.survey.male = true;
     this.survey.female = true;
     this.ageRange.lower = 5;
     this.ageRange.upper = 99;
     this.eachCountrySeparate = false;
+    this.permanentAtp = false;
   }
 
   openFileDialog() {
@@ -136,14 +141,18 @@ export class CreateSurveyPage {
   }
 
   recalculateNumberOfSurveys() {
-    let multiplier = 1;
-    if(this.eachCountrySeparate) {
-      multiplier = this.countries.length == 0 ? this.numberOfAllCountries : this.countries.length;
-    }
-    if (this.pictures.length <= 2) {
-      this.numberOfSurveys = multiplier;
+    if(!this.permanentAtp) {
+      let multiplier = 1;
+      if(this.eachCountrySeparate) {
+        multiplier = this.countries.length == 0 ? this.numberOfAllCountries : this.countries.length;
+      }
+      if (this.pictures.length <= 2) {
+        this.numberOfSurveys = multiplier;
+      } else {
+        this.numberOfSurveys = multiplier * ((this.pictures.length * (this.pictures.length - 1)) / 2);
+      }
     } else {
-      this.numberOfSurveys = multiplier * ((this.pictures.length * (this.pictures.length - 1)) / 2);
+      this.numberOfSurveys = 0;
     }
   }
 
@@ -206,6 +215,16 @@ export class CreateSurveyPage {
     }).present();
   }
 
+  showPermanentSurveyHint() {
+    this.alertController.create({
+      title: 'Permanent ATP',
+      message: 'Permanent ATPs are active as long as you wish. You can select how often a user is allowed to answer this ATP again. This is a free service as long as ATP is in beta.',
+      buttons: [
+        {text: 'OK'}
+      ]
+    }).present();
+  }
+
   surveyComplete(): boolean {
     return this.pictures.length >= 2 && this.model.webuser.credits >= (this.numberOfSurveys * this.surveyType.costs);
   }
@@ -224,9 +243,10 @@ export class CreateSurveyPage {
     } else {
       this.survey.countries = "ALL";
     }
-    this.surveyService.createSurvey(this.survey, this.surveyType, this.pictures, this.eachCountrySeparate).subscribe(resp => {
+    let type: SurveyType = this.permanentAtp ? {key: 'PERMANENT', name: 'permanent', answers: 0, costs: 0} : this.surveyType;
+    this.surveyService.createSurvey(this.survey, type, this.pictures, this.eachCountrySeparate).subscribe(resp => {
       console.log("ATP started");
-      //this.localStorage.addSurveys(resp);
+      this.localStorage.addSurveys(resp);
       this.notificationService.showDefaultToast(this.security ? 'Security ATP started' : 'ATP started');
       this.createEmptySurvey();
       this.nav.pop();
