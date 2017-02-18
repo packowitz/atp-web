@@ -89,7 +89,7 @@
     </ion-item>
     <ion-item *ngIf="!security">
       <ion-label>Create ATP for each country</ion-label>
-      <ion-checkbox color="dark" (ionChange)="recalculateNumberOfSurveys()" [(ngModel)]="eachCountrySeparate"></ion-checkbox>
+      <ion-toggle color="atp-blue" (ionChange)="recalculateNumberOfSurveys()" [(ngModel)]="eachCountrySeparate"></ion-toggle>
     </ion-item>
   </ion-card>
 
