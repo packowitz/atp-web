@@ -264,4 +264,8 @@ export class CreateSurveyPage {
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   }
+
+  toNumber(event): number {
+    return +event;
+  }
 }

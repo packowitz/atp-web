@@ -143,7 +143,7 @@
       </ion-item>
       <ion-item *ngIf="permanentAtp">
         <ion-label class="no-max-width">Days between answers (1-28)</ion-label>
-        <ion-input type="number" min="1" max="28" [(ngModel)]="survey.daysBetween"></ion-input>
+        <ion-input type="number" min="1" max="28" [ngModel]="survey.daysBetween" (ngModelChange)="survey.daysBetween = toNumber($event)"></ion-input>
       </ion-item>
       <ion-item *ngIf="permanentAtp">
         <small class="allow-wrapping">Permanent ATPs are free as long as ATP is in beta</small>
