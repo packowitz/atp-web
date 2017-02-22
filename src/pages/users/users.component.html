@@ -15,5 +15,9 @@
 </ion-header>
 
 <ion-content padding>
-  This is the users page
+  <ion-list *ngIf="users">
+    <button ion-item *ngFor="let user of users">
+      #{{user.id}} - {{user.username ? user.username : 'anonymous'}}
+    </button>
+  </ion-list>
 </ion-content>

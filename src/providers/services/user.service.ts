@@ -28,6 +28,10 @@ export class UserService {
     return this.atpHttp.doGetBackground("/web/app/user");
   }
 
+  listUsers(): Observable<Webuser[]> {
+    return this.atpHttp.doGet("/web/app/user/list", "Loading users");
+  }
+
   getAdminUsers(): Observable<Webuser[]> {
     return this.atpHttp.doGet("/web/app/user/admins", "Loading admins");
   }
