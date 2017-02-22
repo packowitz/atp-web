@@ -9,7 +9,6 @@ import {CouponsPage} from "../pages/coupons/coupons.component";
 import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
 import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
 import {UsersPage} from "../pages/users/users.component";
-import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
 
 
 @Component({
