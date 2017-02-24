@@ -32,6 +32,7 @@ import {UsersPage} from "../pages/users/users.component";
 import {SingleSurveyBar} from "../providers/directives/single-survey-bar.component";
 import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
 import {CountrySelectionPopover} from "../pages/countrySelection/countrySelection.component";
+import {UserDetailPage} from "../pages/users/user-detail.component";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {CountrySelectionPopover} from "../pages/countrySelection/countrySelectio
     MySurveysPage,
     ProfilePage,
     SecuritySurveyPage,
+    UserDetailPage,
     UserHomePage,
     UsersPage,
 
@@ -78,6 +80,7 @@ import {CountrySelectionPopover} from "../pages/countrySelection/countrySelectio
     MySurveysPage,
     ProfilePage,
     SecuritySurveyPage,
+    UserDetailPage,
     UserHomePage,
     UsersPage
   ],

@@ -16,7 +16,7 @@
 
 <ion-content padding>
   <ion-list *ngIf="users">
-    <button ion-item *ngFor="let user of users">
+    <button ion-item *ngFor="let user of users" (click)="showUserDetail(user)">
       #{{user.id}} - {{user.username ? user.username : 'anonymous'}}
     </button>
   </ion-list>

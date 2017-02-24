@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>#{{user.id}} - {{user.username ? user.username : 'anonymous'}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="person" item-left></ion-icon>
+      <h2>Username</h2>
+      <p *ngIf="user.username">{{user.username}}</p>
+      <p *ngIf="!user.username">&lt;&lt;none&gt;&gt;</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="mail" item-left></ion-icon>
+      <h2>Email</h2>
+      <p *ngIf="user.email"><i *ngIf="user.emailConfirmed" class="fa fa-check color-active"></i><i *ngIf="!user.emailConfirmed" class="fa fa-minus color-inactive"></i> {{user.email}}</p>
+      <p *ngIf="!user.email">&lt;&lt;none&gt;&gt;</p>
+    </ion-item>
+    <ion-item *ngIf="userRights">
+      <ion-icon name="color-wand" item-left></ion-icon>
+      <h2>Rights</h2>
+      <p class="fake-link" (click)="toggleCallcenterRight()"><i *ngIf="userRights.callcenter" class="fa fa-check color-active"></i><i *ngIf="!userRights.callcenter" class="fa fa-minus color-inactive"></i> callcenter <i class="fa fa-info-circle" (click)="infoCallcenter($event)"></i></p>
+      <p class="fake-link" (click)="toggleMarketingRight()"><i *ngIf="userRights.marketing" class="fa fa-check color-active"></i><i *ngIf="!userRights.marketing" class="fa fa-minus color-inactive"></i> marketing <i class="fa fa-info-circle" (click)="infoMarketing($event)"></i></p>
+      <p class="fake-link" (click)="toggleUserAdminRight()"><i *ngIf="userRights.userAdmin" class="fa fa-check color-active"></i><i *ngIf="!userRights.userAdmin" class="fa fa-minus color-inactive"></i> user admin <i class="fa fa-info-circle" (click)="infoUserAdmin($event)"></i></p>
+      <p class="fake-link" (click)="toggleSecurityRight()"><i *ngIf="userRights.security" class="fa fa-check color-active"></i><i *ngIf="!userRights.security" class="fa fa-minus color-inactive"></i> security <i class="fa fa-info-circle" (click)="infoSecurity($event)"></i></p>
+      <p class="fake-link" (click)="toggleCouponRight()"><i *ngIf="userRights.coupons" class="fa fa-check color-active"></i><i *ngIf="!userRights.coupons" class="fa fa-minus color-inactive"></i> coupons <i class="fa fa-info-circle" (click)="infoCoupons($event)"></i></p>
+      <p class="fake-link" (click)="toggleResearchRight()"><i *ngIf="userRights.research" class="fa fa-check color-active"></i><i *ngIf="!userRights.research" class="fa fa-minus color-inactive"></i> research <i class="fa fa-info-circle" (click)="infoResearch($event)"></i></p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="cash" item-left></ion-icon>
+      <h2>Pax</h2>
+      <p>{{user.credits | number}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="calendar" item-left></ion-icon>
+      <h2>Last login</h2>
+      <p>{{user.lastLoginTime | date:'dd/MM/yyyy HH:mm:ss'}} UTC</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="information-circle" item-left></ion-icon>
+      <h2>Profile</h2>
+      <p *ngIf="user.yearOfBirth">{{user.yearOfBirth}} -> {{thisYear - user.yearOfBirth}} years old</p>
+      <p *ngIf="!user.yearOfBirth">&lt;&lt;no year of birth&gt;</p>
+      <p *ngIf="user.male">male</p>
+      <p *ngIf="user.male === false">female</p>
+      <p *ngIf="user.male !== true && user.male !== false">&lt;&lt;no gender&gt;</p>
+      <p *ngIf="user.country"><img src="assets/img/flags/{{user.country}}.png" class="flag"></p>
+      <p *ngIf="!user.country">&lt;&lt;no country&gt;</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="happy" *ngIf="user.reliableScore >= 100" item-left></ion-icon>
+      <ion-icon name="sad" *ngIf="user.reliableScore < 100" item-left></ion-icon>
+      <h2>Reliable score</h2>
+      <p>{{user.reliableScore}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="stats" item-left></ion-icon>
+      <h2>This week stats</h2>
+      <p>{{user.surveysAnsweredWeek}} ATPs answered. {{user.surveysStartedWeek}} ATPs started.</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="stats" item-left></ion-icon>
+      <h2>Overall stats</h2>
+      <p>{{user.surveysAnswered}} ATPs answered. {{user.surveysStarted}} ATPs started.</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

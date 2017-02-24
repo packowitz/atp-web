@@ -32,6 +32,14 @@ export class UserService {
     return this.atpHttp.doGet("/web/app/user/list", "Loading users");
   }
 
+  getUserRights(userId: number): Observable<UserRights> {
+    return this.atpHttp.doGet("/web/app/user/rights/" + userId, "Loading details");
+  }
+
+  updateUserRights(userId: number, userRights: UserRights): Observable<UserRights> {
+    return this.atpHttp.doPut("/web/app/user/rights/" + userId, userRights, "Updating user rights");
+  }
+
   getAdminUsers(): Observable<Webuser[]> {
     return this.atpHttp.doGet("/web/app/user/admins", "Loading admins");
   }
