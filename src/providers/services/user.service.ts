@@ -24,6 +24,10 @@ export class UserService {
     return this.atpHttp.doPost("/web/auth/login", {email: email, password: password}, "Logging in");
   }
 
+  registerForBeta(gmail: string, appleId: string, finding: string): Observable<any> {
+    return this.atpHttp.doPost("/web/auth/register-closed-beta", {gmail: gmail, appleId: appleId, finding: finding}, "Sending your data");
+  }
+
   resolveWebuser(): Observable<UserWithRights> {
     return this.atpHttp.doGetBackground("/web/app/user");
   }

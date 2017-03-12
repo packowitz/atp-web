@@ -33,6 +33,7 @@ import {SingleSurveyBar} from "../providers/directives/single-survey-bar.compone
 import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
 import {CountrySelectionPopover} from "../pages/countrySelection/countrySelection.component";
 import {UserDetailPage} from "../pages/users/user-detail.component";
+import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.component";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {UserDetailPage} from "../pages/users/user-detail.component";
     LoadingPage,
     MySurveysPage,
     ProfilePage,
+    RegisterClosedBetaPage,
     SecuritySurveyPage,
     UserDetailPage,
     UserHomePage,
@@ -79,6 +81,7 @@ import {UserDetailPage} from "../pages/users/user-detail.component";
     LoadingPage,
     MySurveysPage,
     ProfilePage,
+    RegisterClosedBetaPage,
     SecuritySurveyPage,
     UserDetailPage,
     UserHomePage,

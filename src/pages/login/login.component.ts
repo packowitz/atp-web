@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {UserService} from "../../providers/services/user.service";
 import {LocalStorage} from "../../providers/services/local-storage.service";
 import {Model} from "../../providers/services/model.service";
-import {NavController} from "ionic-angular";
+import {NavController, ModalController} from "ionic-angular";
 import {LoadingPage} from "../loading/loading.component";
+import {RegisterClosedBetaPage} from "./register-closed-beta.component";
 
 @Component({
   templateUrl: 'login.component.html'
@@ -15,7 +16,8 @@ export class LoginPage {
   constructor(public userService: UserService,
               public localStorage: LocalStorage,
               public model: Model,
-              public nav: NavController) {}
+              public nav: NavController,
+              public modalCtrl: ModalController) {}
 
   doLogin() {
     if(this.email && this.email.length > 4 && this.password && this.password.length > 0) {
@@ -28,5 +30,9 @@ export class LoginPage {
         }
       );
     }
+  }
+
+  showRegisterClosedBeta() {
+    this.modalCtrl.create(RegisterClosedBetaPage).present();
   }
 }

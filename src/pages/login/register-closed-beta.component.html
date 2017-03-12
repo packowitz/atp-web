@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Register for closed BETA</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item no-lines>
+    <div class="h1 color-grey">Be an early adopter and register for closed BETA now</div>
+    <div class="h2 color-grey mt2">Please provide your Google mail address for using ATP on an Android device and your Apple-ID for using an iPhone.</div>
+    <div class="h2 color-grey mt2">We are currently only available for Android. Apple-Phones coming soon.</div>
+  </ion-item>
+  <ion-item class="mt2">
+    <ion-label floating>Google mail address</ion-label>
+    <ion-input type="email" [(ngModel)]="gmail" (keyup.enter)="register()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Apple-ID</ion-label>
+    <ion-input type="email" [(ngModel)]="appleId" (keyup.enter)="register()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>How did you find us?</ion-label>
+    <ion-input type="text" [(ngModel)]="finding" (keyup.enter)="register()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <button ion-button full [disabled]="!gmail && !appleId" (click)="register()">REGISTER</button>
+  </ion-item>
+  <ion-item no-lines class="color-grey">
+    <div class="h5 center">We will notify you by sending an email to the above email address as soon we enabled your account</div>
+  </ion-item>
+</ion-content>
