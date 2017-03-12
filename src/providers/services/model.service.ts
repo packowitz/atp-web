@@ -5,8 +5,8 @@ import {SurveyType} from "../domain/survey-type.model";
 
 @Injectable()
 export class Model {
-  public static server: string = "http://localhost:8080";
-  //public static server: string = "http://api.askthepeople.io";
+  //public static server: string = "http://localhost:8080";
+  public static server: string = "http://api.askthepeople.io";
   public webuser: Webuser;
   public userRights: UserRights;
   public surveyTypes: SurveyType[] = [];
