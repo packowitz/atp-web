@@ -34,6 +34,7 @@ import {CreateSurveyPage} from "../pages/createSurvey/create-survey.component";
 import {CountrySelectionPopover} from "../pages/countrySelection/countrySelection.component";
 import {UserDetailPage} from "../pages/users/user-detail.component";
 import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.component";
+import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.compon
 
     AdminHomePage,
     AnnouncementsPage,
+    ClosedBetaUserPage,
     CountrySelectionPopover,
     CouponsPage,
     CreateAnnouncementPage,
@@ -70,6 +72,7 @@ import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.compon
     AdminHomePage,
     AnnouncementsPage,
     AtpWebApp,
+    ClosedBetaUserPage,
     CountrySelectionPopover,
     CouponsPage,
     CreateAnnouncementPage,

@@ -8,7 +8,12 @@
   <ion-content class="outer-content" *ngIf="model.webuser">
     <ion-list>
       <ion-item-group>
-        <ion-item><div class="color-grey">{{model.webuser.username ? model.webuser.username : 'Me'}}</div></ion-item>
+        <ion-item>
+          <div class="flex-space-between color-grey">
+            {{model.webuser.username ? model.webuser.username : 'Me'}}
+            <span class="fake-link" (click)="logout()">LOGOUT <ion-icon name="log-out"></ion-icon></span>
+          </div>
+        </ion-item>
         <button ion-item menuClose (click)="showProfilePage()" ><ion-icon item-left name="person" color="atp-blue-light"></ion-icon>Personal data</button>
       </ion-item-group>
     </ion-list>
@@ -26,6 +31,7 @@
         <ion-item><div class="color-grey">User Management</div></ion-item>
         <button *ngIf="model.userRights.coupons" ion-item menuClose (click)="showCoupons()"><ion-icon item-left name="card"></ion-icon>Coupons</button>
         <button *ngIf="model.userRights.userAdmin" ion-item menuClose (click)="showUsers()"><ion-icon item-left name="people"></ion-icon>Users</button>
+        <button *ngIf="model.userRights.userAdmin" ion-item menuClose (click)="showBetaUsers()"><ion-icon item-left name="construct"></ion-icon>Beta users</button>
       </ion-item-group>
     </ion-list>
 

@@ -9,6 +9,8 @@ import {CouponsPage} from "../pages/coupons/coupons.component";
 import {SecuritySurveyPage} from "../pages/securitySurveys/security-surveys.component";
 import {MySurveysPage} from "../pages/mySurveys/my-surveys.component";
 import {UsersPage} from "../pages/users/users.component";
+import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component";
+import {LocalStorage} from "../providers/services/local-storage.service";
 
 
 @Component({
@@ -18,9 +20,13 @@ export class AtpWebApp {
   @ViewChild('content') nav: NavController;
   rootPage = LoadingPage;
 
-  constructor(platform: Platform, public model: Model) {
+  constructor(platform: Platform, public model: Model, public localStorage: LocalStorage) {
     platform.ready().then(() => {
     });
+  }
+
+  logout() {
+    this.localStorage.clearStorage().then(() => location.reload());
   }
 
   showProfilePage() {
@@ -61,5 +67,9 @@ export class AtpWebApp {
 
   showUsers() {
     this.nav.push(UsersPage);
+  }
+
+  showBetaUsers() {
+    this.nav.push(ClosedBetaUserPage);
   }
 }

@@ -3,6 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Webuser} from "../domain/webuser.model";
 import {UserRights} from "../domain/user-rights.model";
 import {AtpHttp} from "./atp-http.service";
+import {ClosedBetaUser} from "../domain/closed-beta-user.model";
 
 export class TokenAndUser {
   token: string;
@@ -26,6 +27,14 @@ export class UserService {
 
   registerForBeta(gmail: string, appleId: string, finding: string): Observable<any> {
     return this.atpHttp.doPost("/web/auth/register-closed-beta", {gmail: gmail, appleId: appleId, finding: finding}, "Sending your data");
+  }
+
+  listBetaUsers(): Observable<ClosedBetaUser[]> {
+    return this.atpHttp.doGet("/web/app/closedbeta/list", "Loading beta users");
+  }
+
+  sendAndroidInvite(id: number): Observable<ClosedBetaUser> {
+    return this.atpHttp.doPost("/web/app/closedbeta/invite/android/" + id, {}, "Sending invite");
   }
 
   resolveWebuser(): Observable<UserWithRights> {
