@@ -12,3 +12,7 @@ ion-item-sliding.active-slide ion-item-options {
 .no-max-width {
   max-width: inherit !important;
 }
+
+body {
+  user-select: initial !important;
+}
