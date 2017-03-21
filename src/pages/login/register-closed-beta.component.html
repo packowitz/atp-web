@@ -9,9 +9,9 @@
 
 <ion-content padding>
   <ion-item no-lines>
-    <div class="h1 color-grey">Be an early adopter and register for closed BETA now</div>
-    <div class="h2 color-grey mt2">Please provide your Google mail address for using ATP on an Android device and your Apple-ID for using an iPhone.</div>
-    <div class="h2 color-grey mt2">We are currently only available for Android. Apple-Phones coming soon.</div>
+    <div class="h1 color-grey allow-wrapping">Be an early adopter and register for closed BETA now</div>
+    <div class="h2 color-grey allow-wrapping mt2">Please provide your Google mail address for using ATP on an Android device and your Apple-ID for using an iPhone.</div>
+    <div class="h2 color-grey allow-wrapping mt2">We are currently only available for Android. Apple-Phones coming soon.</div>
   </ion-item>
   <ion-item class="mt2">
     <ion-label floating>Google mail address</ion-label>
@@ -29,6 +29,6 @@
     <button ion-button full [disabled]="!gmail && !appleId" (click)="register()">REGISTER</button>
   </ion-item>
   <ion-item no-lines class="color-grey">
-    <div class="h5 center">We will notify you by sending an email to the above email address as soon we enabled your account</div>
+    <div class="h4 center allow-wrapping">We will notify you by sending an email to the above email address as soon we activate your account</div>
   </ion-item>
 </ion-content>
