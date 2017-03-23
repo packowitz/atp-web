@@ -246,7 +246,9 @@ export class CreateSurveyPage {
     let type: SurveyType = this.permanentAtp ? {key: 'PERMANENT', name: 'permanent', answers: 0, costs: 0} : this.surveyType;
     this.surveyService.createSurvey(this.survey, type, this.pictures, this.eachCountrySeparate).subscribe(resp => {
       console.log("ATP started");
-      this.localStorage.addSurveys(resp);
+      if(!this.security) {
+        this.localStorage.addSurveys(resp);
+      }
       this.notificationService.showDefaultToast(this.security ? 'Security ATP started' : 'ATP started');
       this.createEmptySurvey();
       this.nav.pop();

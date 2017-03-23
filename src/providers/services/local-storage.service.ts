@@ -80,24 +80,28 @@ export class LocalStorage {
   }
 
   deleteSurvey(survey: Survey) {
+    console.log("going to remove atp #" + survey.id + " from local storage");
     let idx = -1;
     this.surveys.forEach((s, i) => {
       if(s.ids.indexOf(survey.id) != -1) {
         idx = i;
       }
     });
+    console.log("found atp to delete at index " + idx);
     if(idx != -1) {
       this.surveys.splice(idx, 1);
     }
   }
 
   deleteSurveyByGroupId(groupId: number) {
+    console.log("going to remove atp group #" + groupId + " from local storage");
     let idx = -1;
     this.surveys.forEach((s, i) => {
       if(s.groupId == groupId) {
         idx = i;
       }
     });
+    console.log("found atp group to delete at index " + idx);
     if(idx != -1) {
       this.surveys.splice(idx, 1);
     }

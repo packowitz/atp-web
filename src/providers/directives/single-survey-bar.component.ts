@@ -4,6 +4,7 @@ import {Util} from "../services/util.service";
 import {Survey} from "../domain/survey.model";
 import {SurveyService} from "../services/survey.service";
 import {NotificationService} from "../services/notification.service";
+import {LocalStorage} from "../services/local-storage.service";
 
 @Component({
   selector: 'single-survey-bar',
@@ -22,6 +23,7 @@ export class SingleSurveyBar {
   constructor(public nav: NavController,
               public surveyService: SurveyService,
               public notificationService: NotificationService,
+              public localStorage: LocalStorage,
               public util: Util) {
   }
 
@@ -61,6 +63,7 @@ export class SingleSurveyBar {
     if(window.confirm("Are you sure to delete this security ATP?")) {
       this.surveyService.deleteSurvey(this.survey).subscribe(
         () => {
+          this.localStorage.deleteSurvey(this.survey);
           this.deleted = true;
           this.notificationService.showDefaultToast("ATP deleted")
         }
