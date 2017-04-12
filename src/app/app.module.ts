@@ -10,7 +10,6 @@ import {NotificationService} from "../providers/services/notification.service";
 import {CountryService} from "../providers/services/country.service";
 import {LocalStorage} from "../providers/services/local-storage.service";
 import {LoadingState} from "../pages/loading/loading-state.model";
-import {Storage} from "@ionic/storage";
 import {SurveyService} from "../providers/services/survey.service";
 import {AdminHomePage} from "../pages/adminHome/admin-home.component";
 import {UserHomePage} from "../pages/userHome/user-home.component";
@@ -35,6 +34,9 @@ import {CountrySelectionPopover} from "../pages/countrySelection/countrySelectio
 import {UserDetailPage} from "../pages/users/user-detail.component";
 import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.component";
 import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {HttpModule} from "@angular/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -65,6 +67,9 @@ import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component
     CountrySplitPipe
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(AtpWebApp)
   ],
   bootstrap: [IonicApp],
@@ -100,7 +105,6 @@ import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component
     LocalStorage,
     Model,
     NotificationService,
-    Storage,
     SurveyService,
     UserService,
     Util,

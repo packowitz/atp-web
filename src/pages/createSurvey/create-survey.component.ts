@@ -67,9 +67,9 @@ export class CreateSurveyPage {
     if (event.target.files && event.target.files[0]) {
       let that = this;
 
-      let img = new Image();
+      let img: HTMLImageElement = new Image();
       img.onload = function () {
-        that.showCroppie(this.width, this.height, this.src);
+        that.showCroppie((<HTMLImageElement>this).width, (<HTMLImageElement>this).height, (<HTMLImageElement>this).src);
       };
       var reader = new FileReader();
       reader.onload = function (e: any) {
