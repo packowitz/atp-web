@@ -8,6 +8,7 @@ import {NotificationService} from "../../providers/services/notification.service
 import {SurveyService} from "../../providers/services/survey.service";
 import {CountryService} from "../../providers/services/country.service";
 import {LocalStorage} from "../../providers/services/local-storage.service";
+import {AgeRange} from "../../providers/domain/age-range.model";
 
 declare var Croppie: any;
 
@@ -22,7 +23,7 @@ export class CreateSurveyPage {
   countries: string[];
   eachCountrySeparate: boolean;
   numberOfAllCountries: number;
-  ageRange = {lower: 1, upper: 99};
+  selectedAgeRanges: AgeRange[] = [];
   exampleText: string;
   pictures: string[];
   croppie: any;
@@ -53,8 +54,7 @@ export class CreateSurveyPage {
     this.countries = [];
     this.survey.male = true;
     this.survey.female = true;
-    this.ageRange.lower = 5;
-    this.ageRange.upper = 99;
+    this.selectedAgeRanges = [];
     this.eachCountrySeparate = false;
     this.permanentAtp = false;
   }
@@ -189,6 +189,14 @@ export class CreateSurveyPage {
     }
   }
 
+  ageSelectedText(): string {
+  if(!this.selectedAgeRanges ||
+    this.selectedAgeRanges.length == 0 ||
+    this.selectedAgeRanges.length == this.model.ageRanges.length) return 'no restriction';
+  if(this.selectedAgeRanges.length == 1) return this.selectedAgeRanges[0].name;
+  return this.selectedAgeRanges.length + ' groups';
+}
+
   changeSurveyType(event: Event) {
     event.preventDefault();
     if(!this.security) {
@@ -230,8 +238,13 @@ export class CreateSurveyPage {
   }
 
   public startSurvey() {
-    this.survey.minAge = this.ageRange.lower;
-    this.survey.maxAge = this.ageRange.upper;
+    if(!this.selectedAgeRanges || this.selectedAgeRanges.length == 0) {
+      this.selectedAgeRanges = this.model.ageRanges;
+    }
+    this.selectedAgeRanges.forEach(r => {
+      this.survey['age_' + r.id] = true;
+    });
+
     this.survey.countries = "";
     if(this.countries.length > 0) {
       this.countries.forEach(c => {

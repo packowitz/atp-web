@@ -5,6 +5,8 @@ import {Survey} from "../domain/survey.model";
 import {SurveyService} from "../services/survey.service";
 import {NotificationService} from "../services/notification.service";
 import {LocalStorage} from "../services/local-storage.service";
+import {AgeRange} from "../domain/age-range.model";
+import {Model} from "../services/model.service";
 
 @Component({
   selector: 'single-survey-bar',
@@ -18,13 +20,31 @@ export class SingleSurveyBar {
   @Input()
   showAttributes: boolean;
 
+  ageRanges: AgeRange[];
   deleted: boolean = false;
 
   constructor(public nav: NavController,
               public surveyService: SurveyService,
               public notificationService: NotificationService,
               public localStorage: LocalStorage,
-              public util: Util) {
+              public util: Util,
+              public model: Model) {
+  }
+
+  loadAgeRanges() {
+    this.ageRanges = [];
+    this.model.ageRanges.forEach(r => {
+      if(this.survey['age_' + r.id]) this.ageRanges.push(r);
+    });
+  }
+
+  getAgeRangeDescription(): string {
+    if(!this.ageRanges) {
+      this.loadAgeRanges();
+    }
+    if(this.ageRanges.length == this.model.ageRanges.length) return 'no restriction';
+    if(this.ageRanges.length == 1) return this.ageRanges[0].description;
+    return this.ageRanges.length + " age groups";
   }
 
   openSurveyDetails() {

@@ -21,6 +21,15 @@ export class LocalStorage {
         this.updateTimestamp = data;
         return this.storage.get(this.prefix + 'surveys').then(data => {
           this.surveys = data ? data : [];
+          if(this.surveys.length > 0) {
+            if(this.surveys[0].age_1 === undefined) {
+              console.log('local storage is outdated. Wiping survey data.');
+              this.updateTimestamp = null;
+              this.surveys = [];
+              this.storage.set(this.prefix + 'updateTimestamp', this.updateTimestamp);
+              this.storage.set(this.prefix + 'surveys', this.surveys);
+            }
+          }
         });
       });
     });

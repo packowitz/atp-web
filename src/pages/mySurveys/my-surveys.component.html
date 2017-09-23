@@ -46,7 +46,7 @@
           <span class="no-small-device" *ngIf="!survey.male && survey.female">female only</span>
           <span class="no-small-device" *ngIf="survey.male && survey.female">male and female</span>
           <span class="no-large-device"><i *ngIf="survey.male" class="fa fa-male"></i><i *ngIf="survey.female" class="fa fa-female"></i></span>
-          <span>{{survey.minAge}}-{{survey.maxAge}} yrs</span>
+          <span>{{getAgeRangeDescription(survey)}}</span>
           <span><span *ngIf="survey.countries == 'ALL'">all countries</span><span *ngIf="survey.countries != 'ALL'">{{survey.countries}}</span></span>
         </div>
 
