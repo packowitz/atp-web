@@ -174,19 +174,4 @@
   </div>
 
   <input type="file" accept="image/*" id="create-survey-file-selection" value="Choose a file" (change)="fileChangeEvent($event)" class="hidden">
-  <div [class.modal-background]="croppie" [class.hidden]="!croppie" (click)="destroyCroppie()">
-    <div class="croppie-modal" (click)="$event.stopPropagation()">
-      <div id="create-survey-croppie"></div>
-      <div class="modal-buttons">
-        <button ion-button small outline (click)="destroyCroppie()">Cancel</button>
-        <button ion-button small outline color="dark" icon-only (click)="rotateLeft()">
-          <ion-icon name="undo"></ion-icon>
-        </button>
-        <button ion-button small outline color="dark" icon-only (click)="rotateRight()">
-          <ion-icon name="redo"></ion-icon>
-        </button>
-        <button ion-button small (click)="saveCroppedPicture()">Take it</button>
-      </div>
-    </div>
-  </div>
 </ion-content>

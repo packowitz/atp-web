@@ -1,0 +1,15 @@
+<div>
+  <div class="croppie-modal">
+    <div id="create-survey-croppie"></div>
+    <div class="modal-buttons">
+      <button ion-button small outline (click)="viewCtrl.dismiss()">Cancel</button>
+      <button ion-button small outline color="dark" icon-only (click)="rotateLeft()">
+        <ion-icon name="undo"></ion-icon>
+      </button>
+      <button ion-button small outline color="dark" icon-only (click)="rotateRight()">
+        <ion-icon name="redo"></ion-icon>
+      </button>
+      <button ion-button small (click)="saveCroppedPicture()">Take it</button>
+    </div>
+  </div>
+</div>

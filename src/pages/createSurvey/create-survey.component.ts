@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavParams, PopoverController, AlertController, NavController} from "ionic-angular";
+import {NavParams, PopoverController, AlertController, NavController, ModalController} from "ionic-angular";
 import {Survey} from "../../providers/domain/survey.model";
 import {Model} from "../../providers/services/model.service";
 import {SurveyType} from "../../providers/domain/survey-type.model";
@@ -9,6 +9,7 @@ import {SurveyService} from "../../providers/services/survey.service";
 import {CountryService} from "../../providers/services/country.service";
 import {LocalStorage} from "../../providers/services/local-storage.service";
 import {AgeRange} from "../../providers/domain/age-range.model";
+import {CroppieComponent} from "../croppie/croppie-component";
 
 declare var Croppie: any;
 
@@ -26,7 +27,7 @@ export class CreateSurveyPage {
   selectedAgeRanges: AgeRange[] = [];
   exampleText: string;
   pictures: string[];
-  croppie: any;
+
   numberOfSurveys: number;
   permanentAtp: boolean;
 
@@ -38,7 +39,8 @@ export class CreateSurveyPage {
               public popoverController: PopoverController,
               public alertController: AlertController,
               public countryService: CountryService,
-              public localStorage: LocalStorage) {
+              public localStorage: LocalStorage,
+              public modalCtrl: ModalController) {
     this.security = navParams.get('security') === true;
     this.countryService.getCountries().subscribe(countries => this.numberOfAllCountries = countries.length);
     this.createEmptySurvey();
@@ -80,59 +82,14 @@ export class CreateSurveyPage {
   }
 
   showCroppie(width: number, height: number, src: string) {
-    let w = width, h = height, maxWidth = window.innerWidth * 0.75, maxHeight = window.innerHeight * 0.75;
-    if (w > maxWidth || h > maxHeight) {
-      let ratio = w / h;
-      if (w > maxWidth) {
-        w = maxWidth;
-        h = w / ratio;
-      }
-      if (h > maxHeight) {
-        h = maxHeight;
-        w = h * ratio;
-      }
-    }
-    this.destroyCroppie();
-    this.croppie = new Croppie(document.getElementById('create-survey-croppie'), {
-      viewport: {width: 300, height: 300},
-      boundary: {width: w, height: h},
-      enableOrientation: true
-    });
-    this.croppie.bind({url: src});
-  }
-
-  destroyCroppie() {
-    if(this.croppie) {
-      this.croppie.destroy();
-      this.croppie = null;
-    }
-  }
-
-  saveCroppedPicture() {
-    if(this.croppie) {
-      this.croppie.result({
-        type: 'canvas',
-        size: 'viewport',
-        format: 'jpeg',
-        quality: 0.5
-      }).then(data => {
-        this.pictures.push(data.substring(data.indexOf(",") + 1));
+    let croppieModal = this.modalCtrl.create(CroppieComponent, {width: width, height: height, src: src});
+    croppieModal.onDidDismiss(data => {
+      if(data) {
+        this.pictures.push(data);
         this.recalculateNumberOfSurveys();
-        this.destroyCroppie();
-      });
-    }
-  }
-
-  rotateLeft() {
-    if(this.croppie) {
-      this.croppie.rotate(-90);
-    }
-  }
-
-  rotateRight() {
-    if(this.croppie) {
-      this.croppie.rotate(90);
-    }
+      }
+    });
+    croppieModal.present();
   }
 
   deletePicture(index: number) {

@@ -37,6 +37,7 @@ import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {IonicStorageModule} from "@ionic/storage";
+import {CroppieComponent} from "../pages/croppie/croppie-component";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {IonicStorageModule} from "@ionic/storage";
     CreateAnnouncementPage,
     CreateCouponPage,
     CreateSurveyPage,
+    CroppieComponent,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
@@ -83,6 +85,7 @@ import {IonicStorageModule} from "@ionic/storage";
     CreateAnnouncementPage,
     CreateCouponPage,
     CreateSurveyPage,
+    CroppieComponent,
     FeedbackDetailPage,
     FeedbackPage,
     LoginPage,
