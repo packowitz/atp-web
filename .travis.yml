@@ -13,6 +13,7 @@ services:
 script:
   - rm -rf www/
   - npm run ionic:build --prod --aot --minifyJs --minifyCss --optimizeJs
+  - node file-revision.js
   - docker build -t pacworx/atp-web .
 
 after_success:
