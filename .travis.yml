@@ -13,6 +13,7 @@ services:
 script:
   - rm -rf www/
   - npm run ionic:build --prod --aot --minifyJs --minifyCss --optimizeJs
+  - npm install md5-file
   - node file-revision.js
   - docker build -t pacworx/atp-web .
 
