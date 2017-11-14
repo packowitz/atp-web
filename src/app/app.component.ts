@@ -26,7 +26,8 @@ export class AtpWebApp {
   }
 
   logout() {
-    this.localStorage.clearStorage().then(() => location.reload());
+    this.localStorage.clearStorage();
+    location.reload();
   }
 
   showProfilePage() {

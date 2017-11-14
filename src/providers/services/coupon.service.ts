@@ -1,7 +1,7 @@
 import {AtpHttp} from "./atp-http.service";
 import {Injectable} from "@angular/core";
 import {Coupon} from "../domain/coupon.model";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CouponService {

@@ -35,9 +35,9 @@ export class LocalStorage {
     });
   }
 
-  clearStorage(): Promise<any> {
+  clearStorage() {
     this.token = null;
-    return this.storage.clear();
+    this.storage.clear();
   }
 
   public getToken(): string {

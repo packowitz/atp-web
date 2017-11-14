@@ -1,6 +1,6 @@
 import {AtpHttp} from "./atp-http.service";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {Survey} from "../domain/survey.model";
 import {SurveyType} from "../domain/survey-type.model";
 import {LocalStorage} from "./local-storage.service";

@@ -35,9 +35,10 @@ import {UserDetailPage} from "../pages/users/user-detail.component";
 import {RegisterClosedBetaPage} from "../pages/login/register-closed-beta.component";
 import {ClosedBetaUserPage} from "../pages/closedBeta/closed-beta-user.component";
 import {BrowserModule} from "@angular/platform-browser";
-import {HttpModule} from "@angular/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {CroppieComponent} from "../pages/croppie/croppie-component";
+import {JwtTokenInterceptor} from "../providers/interceptors/jwt_token.interceptor";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import {CroppieComponent} from "../pages/croppie/croppie-component";
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(AtpWebApp)
   ],
@@ -111,6 +112,7 @@ import {CroppieComponent} from "../pages/croppie/croppie-component";
     SurveyService,
     UserService,
     Util,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -22,7 +22,7 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<TokenAndUser> {
-    return this.atpHttp.doPost("/web/auth/login", {email: email, password: password}, "Logging in");
+    return this.atpHttp.doPost<TokenAndUser>("/web/auth/login", {email: email, password: password}, "Logging in");
   }
 
   registerForBeta(gmail: string, appleId: string, finding: string): Observable<any> {
@@ -30,30 +30,30 @@ export class UserService {
   }
 
   listBetaUsers(): Observable<ClosedBetaUser[]> {
-    return this.atpHttp.doGet("/web/app/closedbeta/list", "Loading beta users");
+    return this.atpHttp.doGet<ClosedBetaUser[]>("/web/app/closedbeta/list", "Loading beta users");
   }
 
   sendAndroidInvite(id: number): Observable<ClosedBetaUser> {
-    return this.atpHttp.doPost("/web/app/closedbeta/invite/android/" + id, {}, "Sending invite");
+    return this.atpHttp.doPost<ClosedBetaUser>("/web/app/closedbeta/invite/android/" + id, {}, "Sending invite");
   }
 
   resolveWebuser(): Observable<UserWithRights> {
-    return this.atpHttp.doGetBackground("/web/app/user");
+    return this.atpHttp.doGetBackground<UserWithRights>("/web/app/user");
   }
 
   listUsers(): Observable<Webuser[]> {
-    return this.atpHttp.doGet("/web/app/user/list", "Loading users");
+    return this.atpHttp.doGet<Webuser[]>("/web/app/user/list", "Loading users");
   }
 
   getUserRights(userId: number): Observable<UserRights> {
-    return this.atpHttp.doGet("/web/app/user/rights/" + userId, "Loading details");
+    return this.atpHttp.doGet<UserRights>("/web/app/user/rights/" + userId, "Loading details");
   }
 
   updateUserRights(userId: number, userRights: UserRights): Observable<UserRights> {
-    return this.atpHttp.doPut("/web/app/user/rights/" + userId, userRights, "Updating user rights");
+    return this.atpHttp.doPut<UserRights>("/web/app/user/rights/" + userId, userRights, "Updating user rights");
   }
 
   getAdminUsers(): Observable<Webuser[]> {
-    return this.atpHttp.doGet("/web/app/user/admins", "Loading admins");
+    return this.atpHttp.doGet<Webuser[]>("/web/app/user/admins", "Loading admins");
   }
 }
