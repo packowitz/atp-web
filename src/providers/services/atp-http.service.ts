@@ -1,7 +1,7 @@
 import {Injectable, ViewChild} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {map, retryWhen, switchMap} from 'rxjs/operators';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Model} from "./model.service";
 import {NotificationService} from "./notification.service";
 import {Alert, AlertController, NavController} from "ionic-angular";
@@ -30,7 +30,7 @@ export class AtpHttp {
   }
 
   doGetBackground<T>(uri: string): Observable<T> {
-    return this.http.get(Model.server + uri).pipe(
+    return this.http.get<T>(Model.server + uri).pipe(
       retryWhen(error => this.retryWhen(error))
     );
   }
@@ -59,7 +59,7 @@ export class AtpHttp {
 
   doDelete<T>(uri: string, loadingMessage: string): Observable<T> {
     this.notificationService.showLoading(loadingMessage);
-    return this.http.delete<T>(Model.server + uri, {responseType: 'text'}).pipe(
+    return this.http.delete<T>(Model.server + uri, {responseType: 'text' as 'json'}).pipe(
       map(data => this.dismissLoading(data)),
       retryWhen(error => this.retryWhen(error))
     );
@@ -72,7 +72,7 @@ export class AtpHttp {
   }
 
   private retryWhen(error): Observable<any> {
-    return error.pipe(switchMap(err => Observable.create(observer => {
+    return error.pipe(switchMap((err: any) => Observable.create(observer => {
       this.notificationService.dismissLoading().then(() => {
         let title: string, message: string, buttons: any[] = [];
 

@@ -5,6 +5,14 @@ import {Observable} from "rxjs/Observable";
 import {Feedback} from "../domain/feedback.model";
 import {FeedbackConversation} from "../domain/feedback-conversation.model";
 
+export class OpenFeedback {
+  IMPROVEMENT: number;
+  BUG_REPORT: number;
+  MESSAGE_SUGGESTION: number;
+  KUDOS: number;
+  OTHER: number;
+}
+
 @Injectable()
 export class FeedbackService {
   constructor(public atpHttp: AtpHttp,
@@ -17,7 +25,7 @@ export class FeedbackService {
   }
 
   updateOpenFeedback() {
-    this.atpHttp.doGetBackground("/web/app/cc/open-count").subscribe(
+    this.atpHttp.doGetBackground<OpenFeedback>("/web/app/cc/open-count").subscribe(
       data => {
         this.model.openImprovements = data.IMPROVEMENT;
         this.model.openBugs = data.BUG_REPORT;

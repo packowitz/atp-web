@@ -16,7 +16,7 @@ export class CountryService {
       return Observable.create(obs => obs.next(this.countries));
     }
 
-    return this.atpHttp.doGetBackground("/country/list").pipe(map(data => {
+    return this.atpHttp.doGetBackground<Country[]>("/country/list").pipe(map(data => {
       this.countries = data;
       return this.countries;
     }));
